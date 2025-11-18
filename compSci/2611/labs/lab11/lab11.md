@@ -28,9 +28,8 @@ srun --gpus=1 --cpus-per-gpu=8 singularity exec --nv -B /data:/data /data/contai
 
 I find this to be much simpler than typing out the entire srun command. However, this is (in my opinion) a bit less persistent as the history of the `.sh` file isn't tracked, while the previous srun command can be found using `history`.
 
-Running `lab11.sh`, we use hyperparameters batch_size=32 and epochs=5. Results of the final epoch can be found below.
-```37/36 - 25s - loss: 0.1809 - accuracy: 0.9349 - val_loss: 0.2246 - val_accuracy: 0.9179
-```
+Running `lab11.sh`, we use hyperparameters batch_size=32 and epochs=5. Results of the final epoch can be found below. \
+`37/36 - 25s - loss: 0.1809 - accuracy: 0.9349 - val_loss: 0.2246 - val_accuracy: 0.9179`
 
 
 
@@ -85,4 +84,4 @@ command="python Lab11.py --data /data/cs2300/L9/fruits --batch_size $current_bat
 singularity exec --nv -B /data:/data ${container} /usr/local/bin/nvidia_entrypoint.sh ${command}
 ```
 
-The first set of runs I tested batch sizes up to 128 and epochs up to 15. I found that this did not result in high enough accuracy, so I added another value to each list and reran.
+The first set of runs I tested batch sizes up to 128 and epochs up to 15. I found that this did not result in high enough accuracy, so I added another value to each list and reran. I found that increasing epochs helped me get closer, but increasing batch size was not helpful. The best value from that run was 0.972, using a batch size of 16 and running 20 epochs. The third run used batch sizes of 12, 16, 20, and 24; with epochs 14, 16, 18, 20.
