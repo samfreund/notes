@@ -10,18 +10,60 @@
 VGG16 is a deep convolutional neural network developed by the Visual Geometry Group at Oxford, known for its simple, uniform architecture composed of stacked 3×3 convolutional layers and 2×2 max-pooling layers. It has 16 weight layers and was designed to test how increasing network depth affects performance. VGG16 was trained on the ImageNet Large Scale Visual Recognition Challenge (ILSVRC) dataset, which contains over 1.2 million labeled images across 1,000 object categories. As a result, VGG16 learns rich, hierarchical visual features—edges, textures, shapes, and object parts—making it effective for image classification and useful as a feature extractor for transfer learning.
 
 ### srun
+```
+Namespace(augment_data='true', batch_size='20', data='/data/cs2300/L9/fruits', epochs='16', fine_tune='false', main_dir='/home/ad.msoe.edu/freunds/classes/2611/lab11/secondGrid')
+Found 1182 images belonging to 6 classes.
+Found 329 images belonging to 6 classes.
+Epoch 1/16
+60/59 - 31s - loss: 1.9712 - accuracy: 0.5288 - val_loss: 0.6461 - val_accuracy: 0.7933
+Epoch 2/16
+60/59 - 28s - loss: 0.4806 - accuracy: 0.8342 - val_loss: 0.4018 - val_accuracy: 0.8693
+Epoch 3/16
+60/59 - 25s - loss: 0.2612 - accuracy: 0.9120 - val_loss: 0.2224 - val_accuracy: 0.9331
+Epoch 4/16
+60/59 - 26s - loss: 0.1744 - accuracy: 0.9391 - val_loss: 0.2383 - val_accuracy: 0.9149
+Epoch 5/16
+60/59 - 27s - loss: 0.1319 - accuracy: 0.9569 - val_loss: 0.1940 - val_accuracy: 0.9422
+Epoch 6/16
+60/59 - 26s - loss: 0.0940 - accuracy: 0.9738 - val_loss: 0.1813 - val_accuracy: 0.9483
+Epoch 7/16
+60/59 - 27s - loss: 0.0771 - accuracy: 0.9763 - val_loss: 0.1674 - val_accuracy: 0.9605
+Epoch 8/16
+60/59 - 26s - loss: 0.0576 - accuracy: 0.9882 - val_loss: 0.1314 - val_accuracy: 0.9635
+Epoch 9/16
+60/59 - 27s - loss: 0.0453 - accuracy: 0.9915 - val_loss: 0.1925 - val_accuracy: 0.9544
+Epoch 10/16
+60/59 - 26s - loss: 0.0389 - accuracy: 0.9907 - val_loss: 0.1325 - val_accuracy: 0.9696
+Epoch 11/16
+60/59 - 26s - loss: 0.0313 - accuracy: 0.9966 - val_loss: 0.1377 - val_accuracy: 0.9605
+Epoch 12/16
+60/59 - 26s - loss: 0.0283 - accuracy: 0.9958 - val_loss: 0.1496 - val_accuracy: 0.9605
+Epoch 13/16
+60/59 - 26s - loss: 0.0242 - accuracy: 0.9966 - val_loss: 0.1262 - val_accuracy: 0.9635
+Epoch 14/16
+60/59 - 27s - loss: 0.0226 - accuracy: 0.9983 - val_loss: 0.1410 - val_accuracy: 0.9696
+Epoch 15/16
+60/59 - 26s - loss: 0.0183 - accuracy: 1.0000 - val_loss: 0.1535 - val_accuracy: 0.9574
+Epoch 16/16
+60/59 - 25s - loss: 0.0175 - accuracy: 0.9992 - val_loss: 0.1301 - val_accuracy: 0.9696
+```
 
-srun --gpus=1 --cpus-per-gpu=8 singularity exec --nv -B /data:/data /data/containers/msoe-tensorflow-20.07-tf2-py3.sif python /home/ad.msoe.edu/freunds/classes/2611/lab11/Lab11.py --data /data/cs2300/L9/fruits --batch_size 8 --epochs 10 –main_dir /home/ad.msoe.edu/freunds/classes/2611/lab11 --augment_data false –fine_tune false
-
+![](/home/samf/notes/compSci/2611/labs/lab11/model_b16_e20.png)
 
 ## Part 2
 
-42 accurate predictions out of 50 images for freshapples. Accuracy: 0.84
-48 accurate predictions out of 49 images for freshbanana. Accuracy: 0.9795918367346939
-42 accurate predictions out of 43 images for freshoranges. Accuracy: 0.9767441860465116
-68 accurate predictions out of 74 images for rottenapples. Accuracy: 0.918918918918919
-67 accurate predictions out of 68 images for rottenbanana. Accuracy: 0.9852941176470589
-17 accurate predictions out of 45 images for rottenoranges. Accuracy: 0.37777777777777777
+42 accurate predictions out of 50 images for freshapples. 
+Accuracy: 0.84
+
+48 accurate predictions out of 49 images for freshbanana. Accuracy: 0.979
+
+42 accurate predictions out of 43 images for freshoranges. Accuracy: 0.976
+
+68 accurate predictions out of 74 images for rottenapples. Accuracy: 0.918
+
+67 accurate predictions out of 68 images for rottenbanana. Accuracy: 0.985
+
+17 accurate predictions out of 45 images for rottenoranges. Accuracy: 0.377
 
 
 ## Part 3
@@ -84,4 +126,6 @@ command="python Lab11.py --data /data/cs2300/L9/fruits --batch_size $current_bat
 singularity exec --nv -B /data:/data ${container} /usr/local/bin/nvidia_entrypoint.sh ${command}
 ```
 
-The first set of runs I tested batch sizes up to 128 and epochs up to 15. I found that this did not result in high enough accuracy, so I added another value to each list and reran. I found that increasing epochs helped me get closer, but increasing batch size was not helpful. The best value from that run was 0.972, using a batch size of 16 and running 20 epochs. The third run used batch sizes of 12, 16, 20, and 24; with epochs 14, 16, 18, 20.
+The first set of runs I tested batch sizes up to 128 and epochs up to 15. I found that this did not result in high enough accuracy, so I added another value to each list and reran. I found that increasing epochs helped me get closer, but increasing batch size was not helpful. The best value from that run was 0.972, using a batch size of 16 and running 20 epochs. The third run used batch sizes of 12, 16, 20, and 24; with epochs 14, 16, 18, 20. With this batch, I found that using a batch size of 16 and 18 epochs I was able to achieve an accuracy of 0.981 on the second to last epoch.
+
+![](/home/samf/notes/compSci/2611/labs/lab11/model_b16_e18.png)
