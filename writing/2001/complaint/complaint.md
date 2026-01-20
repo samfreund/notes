@@ -6,6 +6,7 @@ Milwaukee, WI 53202
 
 freunds@msoe.edu
 
+<<<<<<< Updated upstream:writing/2001/complaint/complaint.md
 123-456-7890
 \
 
@@ -23,6 +24,25 @@ Milwaukee, WI 53202
 
 **Subject: Lack of Allergen-Friendly Food Options on Weekends**
 \
+=======
+123-456-7890 \
+
+
+November 14, 2025 \
+
+
+Director of Residence Life
+
+Milwaukee School of Engineering
+
+Viets Tower Room 103, 324 E Juneau Ave
+
+Milwaukee, WI 53202 \
+
+
+**Subject: Lack of Allergen-Friendly Food Options on Weekends** \
+
+>>>>>>> Stashed changes:writing/2001/complaint.md
 
 Dear Joshua Mitchell,
 

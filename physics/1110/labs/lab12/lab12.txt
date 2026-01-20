@@ -1,0 +1,16 @@
+1. Does your data line up with the fit line?
+With an R² value of 0.9953, the data shows excellent alignment with the linear fit.
+The points closely follow the theoretical prediction.
+
+2. Does the fit line describe the system?
+Yes, the linear relationship between mg and (2Lf/n)² validates equation (6): mg = μ(2Lf/n)².
+The slope of the fit line represents the linear density μ = 0.002400 kg/m.
+Note: There is a small intercept of -0.0187 N, which would ideally be zero.
+
+3. Where might errors have been introduced?
+Potential sources of error include:
+
+Node identification: Difficult to precisely identify nodes, especially for higher n values where nodes are closer together and amplitude is smaller
+Frequency stability: The function generator may drift
+String length measurement: Measuring vibrating string length with system off introduces uncertainty because the string can stretch
+Resonance tuning: Subjective determination of maximum amplitude at resonance
