@@ -3,7 +3,7 @@ data <- read.csv("~/notes/math/2480/labs/lab1/data.csv")
 
 summary(data)
 # 1: Single categorical variable
-# a) Frequency table for Color with relative frequency
+# a) Frequency and relative frequency table for Color
 color_freq <- table(data$Color)
 color_rel_freq <- prop.table(color_freq)
 color_table <- data.frame(
@@ -13,9 +13,7 @@ color_table <- data.frame(
 )
 color_table
 
-# b) Appropriate plot: bar chart of counts (or relative frequencies)
-
-# c) Bar chart of Color counts
+# b) Bar chart of Color frequencies
 barplot(
 	color_freq,
 	main = "Car Color Frequency",

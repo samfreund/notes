@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?><uml:Model xmlns:uml="http://www.omg.org/spec/UML/20110701" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmi:id="b6b1f4e3_48075da3" xmi:version="2.1">
+    <packagedElement xmi:id="d15475f2_48075da3" xmi:type="uml:Interaction">
+        <nestedClassifier xmi:id="4bd32a25_48075da3" xmi:type="uml:Collaboration"/>
+        <lifeline name="mqttBroker:MqttBroker" xmi:id="393d80f0_23f7d05d"/>
+        <lifeline name="mqttClient:MqttClient" xmi:id="393d80f0_1e730495"/>
+        <lifeline name="alertController:AlertController" xmi:id="393d80f0_7d3a22a9"/>
+        <lifeline name="workerHealthModel:WorkerHealthModel" xmi:id="393d80f0_60704c"/>
+        <lifeline name="baselineCalculator:BaselineCalculator" xmi:id="393d80f0_6b19b79"/>
+        <lifeline name="alertView:AlertView" xmi:id="393d80f0_2a32de6c"/>
+        <lifeline name="alertNotification:AlertNotificationPanel" xmi:id="393d80f0_7692d9cc"/>
+        <lifeline name="HealthSafetyOfficer" xmi:id="393d80f0_75f32542"/>
+        <fragment covered="393d80f0_23f7d05d" message="9c2397e7_68e965f5" xmi:id="2a27f2_68e965f5" xmi:type="uml:MessageOccurrenceSpecification"/>
+        <fragment covered="393d80f0_1e730495" message="9c2397e7_68e965f5" xmi:id="d0946577_68e965f5" xmi:type="uml:MessageOccurrenceSpecification"/>
+        <message name="publishMessage(topic, payload)" receiveEvent="d0946577_68e965f5" sendEvent="2a27f2_68e965f5" xmi:id="9c2397e7_68e965f5" xmi:type="uml:Message"/>
+        <ownedComment annotatedElement="393d80f0_23f7d05d" xmi:id="9bde863f_6f27a732" xmi:type="uml:Comment">
+            <body>MQTT QoS Level 1 - At least once delivery</body>
+        </ownedComment>
+        <fragment covered="393d80f0_1e730495" message="9c2397e7_6c779568" xmi:id="2a27f2_6c779568" xmi:type="uml:MessageOccurrenceSpecification"/>
+        <fragment covered="393d80f0_1e730495" message="9c2397e7_6c779568" xmi:id="d0946577_6c779568" xmi:type="uml:MessageOccurrenceSpecification"/>
+        <message name="onMessageArrived(topic, message)" receiveEvent="d0946577_6c779568" sendEvent="2a27f2_6c779568" xmi:id="9c2397e7_6c779568" xmi:type="uml:Message"/>
+        <ownedComment annotatedElement="393d80f0_1e730495" xmi:id="9bde863f_f381794" xmi:type="uml:Comment">
+            <body>Callback triggered by Paho MQTT client library</body>
+        </ownedComment>
+        <fragment covered="393d80f0_1e730495" message="9c2397e7_2cdd0d4b" xmi:id="2a27f2_2cdd0d4b" xmi:type="uml:MessageOccurrenceSpecification"/>
+        <fragment covered="393d80f0_1e730495" message="9c2397e7_2cdd0d4b" xmi:id="d0946577_2cdd0d4b" xmi:type="uml:MessageOccurrenceSpecification"/>
+        <message name="parseAlertPayload(payload)" receiveEvent="d0946577_2cdd0d4b" sendEvent="2a27f2_2cdd0d4b" xmi:id="9c2397e7_2cdd0d4b" xmi:type="uml:Message"/>
+        <ownedComment annotatedElement="393d80f0_1e730495" xmi:id="9bde863f_7e9131d5" xmi:type="uml:Comment">
+            <body>Parses JSON: {workerId:'W12345', type:'RESTING_HR_DEVIATION', currentValue:78, baselineValue:58, deviation:34.5%, timestamp:1643970840000}</body>
+        </ownedComment>
+        <fragment covered="393d80f0_1e730495" message="9c2397e7_2e1d27ba" xmi:id="2a27f2_2e1d27ba" xmi:type="uml:MessageOccurrenceSpecification"/>
+        <fragment covered="393d80f0_7d3a22a9" message="9c2397e7_2e1d27ba" xmi:id="d0946577_2e1d27ba" xmi:type="uml:MessageOccurrenceSpecification"/>
+        <message name="handleIncomingAlert(alertData)" receiveEvent="d0946577_2e1d27ba" sendEvent="2a27f2_2e1d27ba" xmi:id="9c2397e7_2e1d27ba" xmi:type="uml:Message"/>
+        <fragment covered="393d80f0_7d3a22a9" message="9c2397e7_61d6015a" xmi:id="2a27f2_61d6015a" xmi:type="uml:MessageOccurrenceSpecification"/>
+        <fragment covered="393d80f0_60704c" message="9c2397e7_61d6015a" xmi:id="d0946577_61d6015a" xmi:type="uml:MessageOccurrenceSpecification"/>
+        <message name="getWorkerById(workerId)" receiveEvent="d0946577_61d6015a" sendEvent="2a27f2_61d6015a" xmi:id="9c2397e7_61d6015a" xmi:type="uml:Message"/>
+        <fragment covered="393d80f0_60704c" message="9c2397e7_2525ff7e" xmi:id="2a27f2_2525ff7e" xmi:type="uml:MessageOccurrenceSpecification"/>
+        <fragment covered="393d80f0_7d3a22a9" message="9c2397e7_2525ff7e" xmi:id="d0946577_2525ff7e" xmi:type="uml:MessageOccurrenceSpecification"/>
+        <message name="worker {id:'W12345', name:'John Doe', team:'engineering'}" receiveEvent="d0946577_2525ff7e" sendEvent="2a27f2_2525ff7e" xmi:id="9c2397e7_2525ff7e" xmi:type="uml:Message"/>
+        <fragment covered="393d80f0_7d3a22a9" message="9c2397e7_524d6d96" xmi:id="2a27f2_524d6d96" xmi:type="uml:MessageOccurrenceSpecification"/>
+        <fragment covered="393d80f0_6b19b79" message="9c2397e7_524d6d96" xmi:id="d0946577_524d6d96" xmi:type="uml:MessageOccurrenceSpecification"/>
+        <message name="validateDeviation(workerId, currentValue, alertType)" receiveEvent="d0946577_524d6d96" sendEvent="2a27f2_524d6d96" xmi:id="9c2397e7_524d6d96" xmi:type="uml:Message"/>
+        <fragment covered="393d80f0_6b19b79" message="9c2397e7_152aa092" xmi:id="2a27f2_152aa092" xmi:type="uml:MessageOccurrenceSpecification"/>
+        <fragment covered="393d80f0_60704c" message="9c2397e7_152aa092" xmi:id="d0946577_152aa092" xmi:type="uml:MessageOccurrenceSpecification"/>
+        <message name="getRestingHrHistory(workerId, days)" receiveEvent="d0946577_152aa092" sendEvent="2a27f2_152aa092" xmi:id="9c2397e7_152aa092" xmi:type="uml:Message"/>
+        <fragment covered="393d80f0_60704c" message="9c2397e7_44a7bfbc" xmi:id="2a27f2_44a7bfbc" xmi:type="uml:MessageOccurrenceSpecification"/>
+        <fragment covered="393d80f0_6b19b79" message="9c2397e7_44a7bfbc" xmi:id="d0946577_44a7bfbc" xmi:type="uml:MessageOccurrenceSpecification"/>
+        <message name="readings [30-day history, 420 readings]" receiveEvent="d0946577_44a7bfbc" sendEvent="2a27f2_44a7bfbc" xmi:id="9c2397e7_44a7bfbc" xmi:type="uml:Message"/>
+        <fragment covered="393d80f0_6b19b79" message="9c2397e7_4ef37659" xmi:id="2a27f2_4ef37659" xmi:type="uml:MessageOccurrenceSpecification"/>
+        <fragment covered="393d80f0_6b19b79" message="9c2397e7_4ef37659" xmi:id="d0946577_4ef37659" xmi:type="uml:MessageOccurrenceSpecification"/>
+        <message name="calculateBaseline(readings)" receiveEvent="d0946577_4ef37659" sendEvent="2a27f2_4ef37659" xmi:id="9c2397e7_4ef37659" xmi:type="uml:Message"/>
+        <ownedComment annotatedElement="393d80f0_6b19b79" xmi:id="9bde863f_776b83cc" xmi:type="uml:Comment">
+            <body>Computes: mean=58.2, stdDev=4.1, threshold=66.4 (mean + 2*stdDev)</body>
+        </ownedComment>
+        <fragment covered="393d80f0_6b19b79" message="9c2397e7_37858383" xmi:id="2a27f2_37858383" xmi:type="uml:MessageOccurrenceSpecification"/>
+        <fragment covered="393d80f0_6b19b79" message="9c2397e7_37858383" xmi:id="d0946577_37858383" xmi:type="uml:MessageOccurrenceSpecification"/>
+        <message name="assessDeviation(currentValue, baseline)" receiveEvent="d0946577_37858383" sendEvent="2a27f2_37858383" xmi:id="9c2397e7_37858383" xmi:type="uml:Message"/>
+        <ownedComment annotatedElement="393d80f0_6b19b79" xmi:id="9bde863f_4e268090" xmi:type="uml:Comment">
+            <body>Current 78 vs threshold 66.4 = SIGNIFICANT deviation</body>
+        </ownedComment>
+        <fragment covered="393d80f0_6b19b79" message="9c2397e7_1bb266b3" xmi:id="2a27f2_1bb266b3" xmi:type="uml:MessageOccurrenceSpecification"/>
+        <fragment covered="393d80f0_7d3a22a9" message="9c2397e7_1bb266b3" xmi:id="d0946577_1bb266b3" xmi:type="uml:MessageOccurrenceSpecification"/>
+        <message name="analysis {severity:SIGNIFICANT, percentageDeviation:34.5%, recommendation:&quot;Immediate check-in&quot;}" receiveEvent="d0946577_1bb266b3" sendEvent="2a27f2_1bb266b3" xmi:id="9c2397e7_1bb266b3" xmi:type="uml:Message"/>
+        <fragment covered="393d80f0_7d3a22a9" message="9c2397e7_306cf3ea" xmi:id="2a27f2_306cf3ea" xmi:type="uml:MessageOccurrenceSpecification"/>
+        <fragment covered="393d80f0_7d3a22a9" message="9c2397e7_306cf3ea" xmi:id="d0946577_306cf3ea" xmi:type="uml:MessageOccurrenceSpecification"/>
+        <message name="createAlertRecord(worker, alertData, analysis)" receiveEvent="d0946577_306cf3ea" sendEvent="2a27f2_306cf3ea" xmi:id="9c2397e7_306cf3ea" xmi:type="uml:Message"/>
+        <fragment covered="393d80f0_7d3a22a9" message="9c2397e7_2beee7ff" xmi:id="2a27f2_2beee7ff" xmi:type="uml:MessageOccurrenceSpecification"/>
+        <fragment covered="393d80f0_60704c" message="9c2397e7_2beee7ff" xmi:id="d0946577_2beee7ff" xmi:type="uml:MessageOccurrenceSpecification"/>
+        <message name="saveAlert(alert)" receiveEvent="d0946577_2beee7ff" sendEvent="2a27f2_2beee7ff" xmi:id="9c2397e7_2beee7ff" xmi:type="uml:Message"/>
+        <fragment covered="393d80f0_60704c" message="9c2397e7_5136d012" xmi:id="2a27f2_5136d012" xmi:type="uml:MessageOccurrenceSpecification"/>
+        <fragment covered="393d80f0_60704c" message="9c2397e7_5136d012" xmi:id="d0946577_5136d012" xmi:type="uml:MessageOccurrenceSpecification"/>
+        <message name="persistToDatabase(alert)" receiveEvent="d0946577_5136d012" sendEvent="2a27f2_5136d012" xmi:id="9c2397e7_5136d012" xmi:type="uml:Message"/>
+        <ownedComment annotatedElement="393d80f0_60704c" xmi:id="9bde863f_5939a379" xmi:type="uml:Comment">
+            <body>Inserts into HEALTH_ALERTS table with status=UNACKNOWLEDGED</body>
+        </ownedComment>
+        <fragment covered="393d80f0_60704c" message="9c2397e7_e1de817" xmi:id="2a27f2_e1de817" xmi:type="uml:MessageOccurrenceSpecification"/>
+        <fragment covered="393d80f0_7d3a22a9" message="9c2397e7_e1de817" xmi:id="d0946577_e1de817" xmi:type="uml:MessageOccurrenceSpecification"/>
+        <message name="void" receiveEvent="d0946577_e1de817" sendEvent="2a27f2_e1de817" xmi:id="9c2397e7_e1de817" xmi:type="uml:Message"/>
+        <fragment covered="393d80f0_7d3a22a9" message="9c2397e7_52102734" xmi:id="2a27f2_52102734" xmi:type="uml:MessageOccurrenceSpecification"/>
+        <fragment covered="393d80f0_2a32de6c" message="9c2397e7_52102734" xmi:id="d0946577_52102734" xmi:type="uml:MessageOccurrenceSpecification"/>
+        <message name="displayAlert(alert)" receiveEvent="d0946577_52102734" sendEvent="2a27f2_52102734" xmi:id="9c2397e7_52102734" xmi:type="uml:Message"/>
+        <ownedComment annotatedElement="393d80f0_2a32de6c" xmi:id="9bde863f_3541cb24" xmi:type="uml:Comment">
+            <body>Runs on JavaFX Application Thread</body>
+        </ownedComment>
+        <fragment covered="393d80f0_2a32de6c" message="9c2397e7_2177849e" xmi:id="2a27f2_2177849e" xmi:type="uml:MessageOccurrenceSpecification"/>
+        <fragment covered="393d80f0_7692d9cc" message="9c2397e7_2177849e" xmi:id="d0946577_2177849e" xmi:type="uml:MessageOccurrenceSpecification"/>
+        <message name="showNotification(alert)" receiveEvent="d0946577_2177849e" sendEvent="2a27f2_2177849e" xmi:id="9c2397e7_2177849e" xmi:type="uml:Message"/>
+        <fragment covered="393d80f0_7692d9cc" message="9c2397e7_40cb8df7" xmi:id="2a27f2_40cb8df7" xmi:type="uml:MessageOccurrenceSpecification"/>
+        <fragment covered="393d80f0_7692d9cc" message="9c2397e7_40cb8df7" xmi:id="d0946577_40cb8df7" xmi:type="uml:MessageOccurrenceSpecification"/>
+        <message name="buildNotificationContent(alert)" receiveEvent="d0946577_40cb8df7" sendEvent="2a27f2_40cb8df7" xmi:id="9c2397e7_40cb8df7" xmi:type="uml:Message"/>
+        <ownedComment annotatedElement="393d80f0_7692d9cc" xmi:id="9bde863f_13b13b5d" xmi:type="uml:Comment">
+            <body>Creates JavaFX VBox with alert icon, worker name, deviation details</body>
+        </ownedComment>
+        <fragment covered="393d80f0_7692d9cc" message="9c2397e7_2892dae4" xmi:id="2a27f2_2892dae4" xmi:type="uml:MessageOccurrenceSpecification"/>
+        <fragment covered="393d80f0_7692d9cc" message="9c2397e7_2892dae4" xmi:id="d0946577_2892dae4" xmi:type="uml:MessageOccurrenceSpecification"/>
+        <message name="applyUrgencyStyle(severity)" receiveEvent="d0946577_2892dae4" sendEvent="2a27f2_2892dae4" xmi:id="9c2397e7_2892dae4" xmi:type="uml:Message"/>
+        <ownedComment annotatedElement="393d80f0_7692d9cc" xmi:id="9bde863f_355ce81c" xmi:type="uml:Comment">
+            <body>Applies red border, urgent icon for SIGNIFICANT severity</body>
+        </ownedComment>
+        <fragment covered="393d80f0_7692d9cc" message="9c2397e7_29647f75" xmi:id="2a27f2_29647f75" xmi:type="uml:MessageOccurrenceSpecification"/>
+        <fragment covered="393d80f0_7692d9cc" message="9c2397e7_29647f75" xmi:id="d0946577_29647f75" xmi:type="uml:MessageOccurrenceSpecification"/>
+        <message name="slideIn(duration: 400ms)" receiveEvent="d0946577_29647f75" sendEvent="2a27f2_29647f75" xmi:id="9c2397e7_29647f75" xmi:type="uml:Message"/>
+        <ownedComment annotatedElement="393d80f0_7692d9cc" xmi:id="9bde863f_3315d2d7" xmi:type="uml:Comment">
+            <body>Animates notification panel from right edge using Platform.runLater</body>
+        </ownedComment>
+        <fragment covered="393d80f0_7692d9cc" message="9c2397e7_d6e7bab" xmi:id="2a27f2_d6e7bab" xmi:type="uml:MessageOccurrenceSpecification"/>
+        <fragment covered="393d80f0_2a32de6c" message="9c2397e7_d6e7bab" xmi:id="d0946577_d6e7bab" xmi:type="uml:MessageOccurrenceSpecification"/>
+        <message name="void" receiveEvent="d0946577_d6e7bab" sendEvent="2a27f2_d6e7bab" xmi:id="9c2397e7_d6e7bab" xmi:type="uml:Message"/>
+        <fragment covered="393d80f0_2a32de6c" message="9c2397e7_5fa07e12" xmi:id="2a27f2_5fa07e12" xmi:type="uml:MessageOccurrenceSpecification"/>
+        <fragment covered="393d80f0_2a32de6c" message="9c2397e7_5fa07e12" xmi:id="d0946577_5fa07e12" xmi:type="uml:MessageOccurrenceSpecification"/>
+        <message name="updateAlertList(alert)" receiveEvent="d0946577_5fa07e12" sendEvent="2a27f2_5fa07e12" xmi:id="9c2397e7_5fa07e12" xmi:type="uml:Message"/>
+        <ownedComment annotatedElement="393d80f0_2a32de6c" xmi:id="9bde863f_55b53d44" xmi:type="uml:Comment">
+            <body>Adds to ObservableList&lt;HealthAlert&gt; bound to TableView</body>
+        </ownedComment>
+        <fragment covered="393d80f0_2a32de6c" message="9c2397e7_482bce4f" xmi:id="2a27f2_482bce4f" xmi:type="uml:MessageOccurrenceSpecification"/>
+        <fragment covered="393d80f0_2a32de6c" message="9c2397e7_482bce4f" xmi:id="d0946577_482bce4f" xmi:type="uml:MessageOccurrenceSpecification"/>
+        <message name="playAlertSound(severity)" receiveEvent="d0946577_482bce4f" sendEvent="2a27f2_482bce4f" xmi:id="9c2397e7_482bce4f" xmi:type="uml:Message"/>
+        <ownedComment annotatedElement="393d80f0_2a32de6c" xmi:id="9bde863f_366647c2" xmi:type="uml:Comment">
+            <body>Plays urgent.wav for SIGNIFICANT alerts</body>
+        </ownedComment>
+        <fragment covered="393d80f0_2a32de6c" message="9c2397e7_6a6afff2" xmi:id="2a27f2_6a6afff2" xmi:type="uml:MessageOccurrenceSpecification"/>
+        <fragment covered="393d80f0_7d3a22a9" message="9c2397e7_6a6afff2" xmi:id="d0946577_6a6afff2" xmi:type="uml:MessageOccurrenceSpecification"/>
+        <message name="void" receiveEvent="d0946577_6a6afff2" sendEvent="2a27f2_6a6afff2" xmi:id="9c2397e7_6a6afff2" xmi:type="uml:Message"/>
+        <fragment covered="393d80f0_7d3a22a9" message="9c2397e7_1649b0e6" xmi:id="2a27f2_1649b0e6" xmi:type="uml:MessageOccurrenceSpecification"/>
+        <fragment covered="393d80f0_1e730495" message="9c2397e7_1649b0e6" xmi:id="d0946577_1649b0e6" xmi:type="uml:MessageOccurrenceSpecification"/>
+        <message name="void" receiveEvent="d0946577_1649b0e6" sendEvent="2a27f2_1649b0e6" xmi:id="9c2397e7_1649b0e6" xmi:type="uml:Message"/>
+        <fragment covered="393d80f0_1e730495" message="9c2397e7_865dd6" xmi:id="2a27f2_865dd6" xmi:type="uml:MessageOccurrenceSpecification"/>
+        <fragment covered="393d80f0_23f7d05d" message="9c2397e7_865dd6" xmi:id="d0946577_865dd6" xmi:type="uml:MessageOccurrenceSpecification"/>
+        <message name="publishAck(messageId)" receiveEvent="d0946577_865dd6" sendEvent="2a27f2_865dd6" xmi:id="9c2397e7_865dd6" xmi:type="uml:Message"/>
+        <ownedComment annotatedElement="393d80f0_1e730495" xmi:id="9bde863f_4da4253" xmi:type="uml:Comment">
+            <body>MQTT QoS 1 acknowledgment</body>
+        </ownedComment>
+        <fragment covered="393d80f0_2a32de6c" message="9c2397e7_3972a855" xmi:id="2a27f2_3972a855" xmi:type="uml:MessageOccurrenceSpecification"/>
+        <fragment covered="393d80f0_75f32542" message="9c2397e7_3972a855" xmi:id="d0946577_3972a855" xmi:type="uml:MessageOccurrenceSpecification"/>
+        <message name="Visual: Red notification banner | Audio: Urgent alert tone" receiveEvent="d0946577_3972a855" sendEvent="2a27f2_3972a855" xmi:id="9c2397e7_3972a855" xmi:type="uml:Message"/>
+        <ownedComment annotatedElement="393d80f0_75f32542" xmi:id="9bde863f_62e7f11d" xmi:type="uml:Comment">
+            <body>Shows: ⚠ John Doe - Resting HR elevated 34.5% above baseline (78 vs 58 BPM)</body>
+        </ownedComment>
+    </packagedElement>
+</uml:Model>

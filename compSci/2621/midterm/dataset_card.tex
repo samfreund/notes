@@ -1,0 +1,144 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{hyperref}
+\usepackage{titlesec}
+\usepackage{parskip}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue
+}
+
+\title{Dataset Card}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+% ─────────────────────────────────────────────
+\section*{Summary Information}
+\textit{This describes the data set that you are going to use and what it was used for.
+You may choose to list models in here that used the data described in the card.
+The date is also important due to how data may change over time.
+Dataset cards do not necessarily describe all of the data provided by a sponsor or for the project,
+but they should describe all data \textbf{used} for the project.}
+
+\begin{tabular}{@{}ll@{}}
+\toprule
+\textbf{Field}       & \textbf{Description} \\
+\midrule
+Name                 &                      \\
+Curation Date        &                      \\
+Sensitivity Level    &                      \\
+Summary              &                      \\
+Source               &                      \\
+\bottomrule
+\end{tabular}
+
+% ─────────────────────────────────────────────
+\section*{Card Authors}
+\textit{This describes the people that contributed to creating the dataset card.}
+
+\begin{tabular}{@{}ll@{}}
+\toprule
+\textbf{Name} & \textbf{Email} \\
+\midrule
+Sam Freund          & freunds@msoe.edu  \\
+\bottomrule
+\end{tabular}
+
+% ─────────────────────────────────────────────
+\section*{Data Overview}
+\textit{General description of the data set. Such as number of features, how large the files are,
+number of observations, etc.}
+
+\begin{tabular}{@{}ll@{}}
+\toprule
+\textbf{Field}      & \textbf{Value} \\
+\midrule
+Storage Size        &                \\
+Number of Rows      &                \\
+Number of Features  &                \\
+Data Format         &                \\
+\bottomrule
+\end{tabular}
+
+% ─────────────────────────────────────────────
+\section*{Numerical Features Summary}
+\textit{This section shows the summary statistics for all numerical features in the data set.}
+
+\begin{longtable}{@{}lllllllll@{}}
+\toprule
+\textbf{Feature} & \textbf{Count} & \textbf{Mean} & \textbf{Std Dev} &
+\textbf{Min} & \textbf{25\%} & \textbf{Median} & \textbf{75\%} & \textbf{Max} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Feature} & \textbf{Count} & \textbf{Mean} & \textbf{Std Dev} &
+\textbf{Min} & \textbf{25\%} & \textbf{Median} & \textbf{75\%} & \textbf{Max} \\
+\midrule
+\endhead
+ & & & & & & & & \\
+\bottomrule
+\end{longtable}
+
+% ─────────────────────────────────────────────
+\section*{Categorical Features Summary}
+\textit{This section shows the equivalent summary statistic for all categorical features in the data set.}
+
+\begin{tabular}{@{}lll@{}}
+\toprule
+\textbf{Feature} & \textbf{Unique Values} & \textbf{Most Common Value} \\
+\midrule
+                 &                        &                            \\
+\bottomrule
+\end{tabular}
+
+% ─────────────────────────────────────────────
+\section*{Field Information}
+\textit{Document the table that is encoded, i.e.\ the table they are using to build the encoding.}
+
+\begin{longtable}{@{}llll@{}}
+\toprule
+\textbf{Feature Name} & \textbf{Data Type} & \textbf{Statistical Type} & \textbf{Description} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Feature Name} & \textbf{Data Type} & \textbf{Statistical Type} & \textbf{Description} \\
+\midrule
+\endhead
+Feature\_example & int & Nominal & An example feature created for the use of the dataset card format. \\
+\bottomrule
+\end{longtable}
+
+% ─────────────────────────────────────────────
+\section*{Example Entry}
+\textit{It is helpful to track a few observations that you are familiar with.
+Pick an ``average'' observation as well as a few that exhibit features or classes that you are
+interested in. E.g.\ for a cancer dataset you might choose a sample that has all of the classes
+that you want to predict or that shows severe progression of the disease.}
+
+% ─────────────────────────────────────────────
+\section*{Exploratory Charts}
+\textit{Include a scatter plot matrix of all of your numeric features.
+Show bar graphs for your categorical features.
+If you know what response you are interested in, you might choose to make a plot of the first two
+principal components (from PCA or similar feature reduction algorithm) vs.\ your known response
+or classes.}
+
+% ─────────────────────────────────────────────
+\section*{Notable Feature Processing}
+\textit{If you decide to do feature scaling or if you are doing any feature engineering, the process
+should go here. Remember that the mean and standard deviation of features would be important for
+any future applications that might use this data.}
+
+% ─────────────────────────────────────────────
+\section*{Notes}
+\textit{Document any additional considerations, concerns, or otherwise here.}
+
+\end{document}

@@ -5,3 +5,8 @@ __pycache__
 daVenv
 
 .ipynb_checkpoints
+
+# LaTeX stuff
+*.aux
+*.log
+*.out

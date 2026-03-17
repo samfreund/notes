@@ -1,0 +1,111 @@
+% Generic College Assignment Template
+\documentclass[12pt,a4paper]{article}
+
+% Uncomment to use letters instead of numbers for subsections
+% \renewcommand{\thesubsection}{\thesection.\alph{subsection}}
+
+% Package imports
+\usepackage[utf8]{inputenc}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{cite}
+\usepackage{listings}
+\usepackage{xcolor}
+
+% Header and footer setup
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\courseName}
+\rhead{\authorName}
+\cfoot{\thepage}
+
+% Code listing settings (optional, for programming assignments)
+\lstset{
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    frame=single,
+    numbers=left,
+    numberstyle=\tiny,
+    commentstyle=\color{gray},
+    keywordstyle=\color{blue}
+}
+
+% Document metadata
+\newcommand{\authorName}{Sam Freund}
+\newcommand{\courseName}{CSC 2621: Introduction to Data Science}
+\newcommand{\assignmentTitle}{Midterm Project}
+\newcommand{\dueDate}{\today}
+
+% Theorem environments (uncomment if needed)
+% \newtheorem{theorem}{Theorem}
+% \newtheorem{lemma}{Lemma}
+% \newtheorem{definition}{Definition}
+
+\begin{document}
+
+% Title section
+\begin{center}
+    {\Large \textbf{\assignmentTitle}}\\[0.5em]
+    {\large \courseName}\\[1em]
+    \authorName\ \\
+    Date: \dueDate
+\end{center}
+
+\vspace{1em}
+\hrule
+\vspace{2em}
+
+% Main content starts here
+\section{Introduction}
+
+Write your introduction here. This template provides a clean starting point for various types of assignments.
+
+\section{Methods}
+
+\section{Results}
+
+\section{Discussion}
+
+% \begin{itemize}
+%     \item Bullet points
+%     \item Mathematical equations: $E = mc^2$
+%     \item Numbered lists
+% \end{itemize}
+
+% For equations, use:
+% \begin{equation}
+%     \int_{-\infty}^{\infty} e^{-x^2} dx = \sqrt{\pi}
+% \end{equation}
+
+% For multi-line equations:
+% \begin{align}
+%     f(x) &= x^2 + 2x + 1 \\
+%     &= (x + 1)^2
+% \end{align}
+
+% Uncomment to include a figure
+% \begin{figure}[h]
+%     \centering
+%     \includegraphics[width=0.6\textwidth]{filename.png}
+%     \caption{Your caption here}
+%     \label{fig:example}
+% \end{figure}
+
+% Example code block (uncomment if needed)
+% \begin{lstlisting}[language=Python, caption=Example code]
+% def hello_world():
+%     print("Hello, World!")
+% \end{lstlisting}
+
+% Insert code from file
+% \lstinputlisting[language=R, caption=R Code for Lab 1]{lab1.R}
+
+% References (uncomment if needed)
+% \bibliographystyle{plain}
+% \bibliography{references}
+
+\end{document}

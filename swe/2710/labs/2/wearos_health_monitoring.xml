@@ -1,0 +1,784 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<XMI xmi.version="1.1" xmlns:UML="omg.org/UML1.3">
+  <XMI.header>
+    <XMI.documentation>
+      <XMI.exporter>Enterprise Architect</XMI.exporter>
+      <XMI.exporterVersion>2.5</XMI.exporterVersion>
+    </XMI.documentation>
+  </XMI.header>
+  <XMI.content>
+    <UML:Model name="EA_Model" xmi.id="MX_EAID_1">
+      <UML:Namespace.ownedElement>
+        
+        <!-- Package: WearOS Health Monitoring System -->
+        <UML:Package name="WearOS Health Monitoring System" xmi.id="EAPK_1" isRoot="false" isLeaf="false" isAbstract="false">
+          <UML:Namespace.ownedElement>
+            
+            <!-- Sequence Diagram 1: Trade Worker BPM Display -->
+            <UML:Collaboration xmi.id="EAID_SD1" name="Trade Worker BPM Display">
+              <UML:Namespace.ownedElement>
+                
+                <!-- Lifelines/Objects -->
+                
+                <!-- Actor: Trade Worker -->
+                <UML:Object xmi.id="EAID_OBJ_TradeWorker" name="TradeWorker">
+                  <UML:ModelElement.stereotype>
+                    <UML:Stereotype name="actor"/>
+                  </UML:ModelElement.stereotype>
+                  <UML:Classifier.feature/>
+                </UML:Object>
+                
+                <!-- View: WorkStatusDisplay -->
+                <UML:Object xmi.id="EAID_OBJ_WorkStatusDisplay" name="workStatusDisplay:WorkStatusDisplay">
+                  <UML:ModelElement.stereotype>
+                    <UML:Stereotype name="View"/>
+                  </UML:ModelElement.stereotype>
+                </UML:Object>
+                
+                <!-- Controller: HeartRateController -->
+                <UML:Object xmi.id="EAID_OBJ_HeartRateController" name="heartRateController:HeartRateController">
+                  <UML:ModelElement.stereotype>
+                    <UML:Stereotype name="Controller"/>
+                  </UML:ModelElement.stereotype>
+                </UML:Object>
+                
+                <!-- Model: HealthDataRepository -->
+                <UML:Object xmi.id="EAID_OBJ_HealthDataRepo" name="healthDataRepo:HealthDataRepository">
+                  <UML:ModelElement.stereotype>
+                    <UML:Stereotype name="Model"/>
+                  </UML:ModelElement.stereotype>
+                </UML:Object>
+                
+                <!-- External: HealthServices -->
+                <UML:Object xmi.id="EAID_OBJ_HealthServices" name="healthServices:HealthServices">
+                  <UML:ModelElement.stereotype>
+                    <UML:Stereotype name="External"/>
+                  </UML:ModelElement.stereotype>
+                </UML:Object>
+                
+                <!-- Controller: StatisticsCalculator -->
+                <UML:Object xmi.id="EAID_OBJ_StatsCalculator" name="statsCalculator:StatisticsCalculator">
+                  <UML:ModelElement.stereotype>
+                    <UML:Stereotype name="Controller"/>
+                  </UML:ModelElement.stereotype>
+                </UML:Object>
+                
+                <!-- Model: DailyStatistics -->
+                <UML:Object xmi.id="EAID_OBJ_DailyStats" name="dailyStats:DailyStatistics">
+                  <UML:ModelElement.stereotype>
+                    <UML:Stereotype name="Model"/>
+                  </UML:ModelElement.stereotype>
+                </UML:Object>
+                
+                <!-- Messages/Interactions -->
+                
+                <!-- 1. TradeWorker -> WorkStatusDisplay -->
+                <UML:Message xmi.id="EAID_MSG_SD1_1" name="glanceAtWatch()">
+                  <UML:Message.sender>
+                    <UML:Object xmi.idref="EAID_OBJ_TradeWorker"/>
+                  </UML:Message.sender>
+                  <UML:Message.receiver>
+                    <UML:Object xmi.idref="EAID_OBJ_WorkStatusDisplay"/>
+                  </UML:Message.receiver>
+                  <UML:Message.action>
+                    <UML:CallAction name="glanceAtWatch"/>
+                  </UML:Message.action>
+                </UML:Message>
+                
+                <!-- 2. WorkStatusDisplay -> self: onResume() -->
+                <UML:Message xmi.id="EAID_MSG_SD1_2" name="onResume()">
+                  <UML:Message.sender>
+                    <UML:Object xmi.idref="EAID_OBJ_WorkStatusDisplay"/>
+                  </UML:Message.sender>
+                  <UML:Message.receiver>
+                    <UML:Object xmi.idref="EAID_OBJ_WorkStatusDisplay"/>
+                  </UML:Message.receiver>
+                  <UML:Message.action>
+                    <UML:CallAction name="onResume"/>
+                  </UML:Message.action>
+                </UML:Message>
+                
+                <!-- 3. WorkStatusDisplay -> HeartRateController: refreshHeartRateData() -->
+                <UML:Message xmi.id="EAID_MSG_SD1_3" name="refreshHeartRateData()">
+                  <UML:Message.sender>
+                    <UML:Object xmi.idref="EAID_OBJ_WorkStatusDisplay"/>
+                  </UML:Message.sender>
+                  <UML:Message.receiver>
+                    <UML:Object xmi.idref="EAID_OBJ_HeartRateController"/>
+                  </UML:Message.receiver>
+                  <UML:Message.action>
+                    <UML:CallAction name="refreshHeartRateData"/>
+                  </UML:Message.action>
+                </UML:Message>
+                
+                <!-- 4. HeartRateController -> HealthDataRepo: getCurrentHeartRate() -->
+                <UML:Message xmi.id="EAID_MSG_SD1_4" name="getCurrentHeartRate() : HeartRateReading">
+                  <UML:Message.sender>
+                    <UML:Object xmi.idref="EAID_OBJ_HeartRateController"/>
+                  </UML:Message.sender>
+                  <UML:Message.receiver>
+                    <UML:Object xmi.idref="EAID_OBJ_HealthDataRepo"/>
+                  </UML:Message.receiver>
+                  <UML:Message.action>
+                    <UML:CallAction name="getCurrentHeartRate"/>
+                  </UML:Message.action>
+                </UML:Message>
+                
+                <!-- 5. HealthDataRepo -> HealthServices: getLatestMeasurement() -->
+                <UML:Message xmi.id="EAID_MSG_SD1_5" name="getLatestMeasurement(DataType.HEART_RATE_BPM) : DataPoint">
+                  <UML:Message.sender>
+                    <UML:Object xmi.idref="EAID_OBJ_HealthDataRepo"/>
+                  </UML:Message.sender>
+                  <UML:Message.receiver>
+                    <UML:Object xmi.idref="EAID_OBJ_HealthServices"/>
+                  </UML:Message.receiver>
+                  <UML:Message.action>
+                    <UML:CallAction name="getLatestMeasurement"/>
+                  </UML:Message.action>
+                </UML:Message>
+                
+                <!-- 6. Return: dataPoint -->
+                <UML:Message xmi.id="EAID_MSG_SD1_6" name="dataPoint {timestamp: 1643970840000, value: 125.0}">
+                  <UML:ModelElement.stereotype>
+                    <UML:Stereotype name="return"/>
+                  </UML:ModelElement.stereotype>
+                  <UML:Message.sender>
+                    <UML:Object xmi.idref="EAID_OBJ_HealthServices"/>
+                  </UML:Message.sender>
+                  <UML:Message.receiver>
+                    <UML:Object xmi.idref="EAID_OBJ_HealthDataRepo"/>
+                  </UML:Message.receiver>
+                </UML:Message>
+                
+                <!-- 7. HealthDataRepo -> self: createHeartRateReading() -->
+                <UML:Message xmi.id="EAID_MSG_SD1_7" name="createHeartRateReading(dataPoint: DataPoint) : HeartRateReading">
+                  <UML:Message.sender>
+                    <UML:Object xmi.idref="EAID_OBJ_HealthDataRepo"/>
+                  </UML:Message.sender>
+                  <UML:Message.receiver>
+                    <UML:Object xmi.idref="EAID_OBJ_HealthDataRepo"/>
+                  </UML:Message.receiver>
+                  <UML:Message.action>
+                    <UML:CallAction name="createHeartRateReading"/>
+                  </UML:Message.action>
+                </UML:Message>
+                
+                <!-- 8. Return: currentReading -->
+                <UML:Message xmi.id="EAID_MSG_SD1_8" name="currentReading {bpm: 125, timestamp: 1643970840000}">
+                  <UML:ModelElement.stereotype>
+                    <UML:Stereotype name="return"/>
+                  </UML:ModelElement.stereotype>
+                  <UML:Message.sender>
+                    <UML:Object xmi.idref="EAID_OBJ_HealthDataRepo"/>
+                  </UML:Message.sender>
+                  <UML:Message.receiver>
+                    <UML:Object xmi.idref="EAID_OBJ_HeartRateController"/>
+                  </UML:Message.receiver>
+                </UML:Message>
+                
+                <!-- 9. HeartRateController -> StatisticsCalculator: calculateDailyAverage() -->
+                <UML:Message xmi.id="EAID_MSG_SD1_9" name="calculateDailyAverage(workerId: String) : double">
+                  <UML:Message.sender>
+                    <UML:Object xmi.idref="EAID_OBJ_HeartRateController"/>
+                  </UML:Message.sender>
+                  <UML:Message.receiver>
+                    <UML:Object xmi.idref="EAID_OBJ_StatsCalculator"/>
+                  </UML:Message.receiver>
+                  <UML:Message.action>
+                    <UML:CallAction name="calculateDailyAverage"/>
+                  </UML:Message.action>
+                </UML:Message>
+                
+                <!-- 10. StatisticsCalculator -> DailyStatistics: getTodaysReadings() -->
+                <UML:Message xmi.id="EAID_MSG_SD1_10" name="getTodaysReadings(workerId: String, startTime: long) : List&lt;HeartRateReading&gt;">
+                  <UML:Message.sender>
+                    <UML:Object xmi.idref="EAID_OBJ_StatsCalculator"/>
+                  </UML:Message.sender>
+                  <UML:Message.receiver>
+                    <UML:Object xmi.idref="EAID_OBJ_DailyStats"/>
+                  </UML:Message.receiver>
+                  <UML:Message.action>
+                    <UML:CallAction name="getTodaysReadings"/>
+                  </UML:Message.action>
+                </UML:Message>
+                
+                <!-- 11. Return: readings list -->
+                <UML:Message xmi.id="EAID_MSG_SD1_11" name="readings [List size: 247 readings]">
+                  <UML:ModelElement.stereotype>
+                    <UML:Stereotype name="return"/>
+                  </UML:ModelElement.stereotype>
+                  <UML:Message.sender>
+                    <UML:Object xmi.idref="EAID_OBJ_DailyStats"/>
+                  </UML:Message.sender>
+                  <UML:Message.receiver>
+                    <UML:Object xmi.idref="EAID_OBJ_StatsCalculator"/>
+                  </UML:Message.receiver>
+                </UML:Message>
+                
+                <!-- 12. StatisticsCalculator -> self: computeAverage() -->
+                <UML:Message xmi.id="EAID_MSG_SD1_12" name="computeAverage(readings: List&lt;HeartRateReading&gt;) : double">
+                  <UML:Message.sender>
+                    <UML:Object xmi.idref="EAID_OBJ_StatsCalculator"/>
+                  </UML:Message.sender>
+                  <UML:Message.receiver>
+                    <UML:Object xmi.idref="EAID_OBJ_StatsCalculator"/>
+                  </UML:Message.receiver>
+                  <UML:Message.action>
+                    <UML:CallAction name="computeAverage"/>
+                  </UML:Message.action>
+                  <UML:ModelElement.taggedValue>
+                    <UML:TaggedValue tag="note" value="Filters outliers (&gt;200 or &lt;40), sums valid BPM values, divides by count"/>
+                  </UML:ModelElement.taggedValue>
+                </UML:Message>
+                
+                <!-- 13. Return: averageBpm -->
+                <UML:Message xmi.id="EAID_MSG_SD1_13" name="averageBpm: 98.3">
+                  <UML:ModelElement.stereotype>
+                    <UML:Stereotype name="return"/>
+                  </UML:ModelElement.stereotype>
+                  <UML:Message.sender>
+                    <UML:Object xmi.idref="EAID_OBJ_StatsCalculator"/>
+                  </UML:Message.sender>
+                  <UML:Message.receiver>
+                    <UML:Object xmi.idref="EAID_OBJ_HeartRateController"/>
+                  </UML:Message.receiver>
+                </UML:Message>
+                
+                <!-- 14. HeartRateController -> self: createDisplayModel() -->
+                <UML:Message xmi.id="EAID_MSG_SD1_14" name="createDisplayModel(current: HeartRateReading, average: double) : BpmDisplayModel">
+                  <UML:Message.sender>
+                    <UML:Object xmi.idref="EAID_OBJ_HeartRateController"/>
+                  </UML:Message.sender>
+                  <UML:Message.receiver>
+                    <UML:Object xmi.idref="EAID_OBJ_HeartRateController"/>
+                  </UML:Message.receiver>
+                  <UML:Message.action>
+                    <UML:CallAction name="createDisplayModel"/>
+                  </UML:Message.action>
+                </UML:Message>
+                
+                <!-- 15. Return: displayModel -->
+                <UML:Message xmi.id="EAID_MSG_SD1_15" name="displayModel {currentBpm: 125, avgBpm: 98, status: ELEVATED}">
+                  <UML:ModelElement.stereotype>
+                    <UML:Stereotype name="return"/>
+                  </UML:ModelElement.stereotype>
+                  <UML:Message.sender>
+                    <UML:Object xmi.idref="EAID_OBJ_HeartRateController"/>
+                  </UML:Message.sender>
+                  <UML:Message.receiver>
+                    <UML:Object xmi.idref="EAID_OBJ_WorkStatusDisplay"/>
+                  </UML:Message.receiver>
+                </UML:Message>
+                
+                <!-- 16. WorkStatusDisplay -> self: updateBpmDisplay() -->
+                <UML:Message xmi.id="EAID_MSG_SD1_16" name="updateBpmDisplay(model: BpmDisplayModel)">
+                  <UML:Message.sender>
+                    <UML:Object xmi.idref="EAID_OBJ_WorkStatusDisplay"/>
+                  </UML:Message.sender>
+                  <UML:Message.receiver>
+                    <UML:Object xmi.idref="EAID_OBJ_WorkStatusDisplay"/>
+                  </UML:Message.receiver>
+                  <UML:Message.action>
+                    <UML:CallAction name="updateBpmDisplay"/>
+                  </UML:Message.action>
+                  <UML:ModelElement.taggedValue>
+                    <UML:TaggedValue tag="note" value="Updates TextView components, sets color based on status"/>
+                  </UML:ModelElement.taggedValue>
+                </UML:Message>
+                
+                <!-- 17. Return to TradeWorker: Display shows result -->
+                <UML:Message xmi.id="EAID_MSG_SD1_17" name="Display shows '125 BPM' (large), 'Daily Avg: 98 BPM' (small)">
+                  <UML:ModelElement.stereotype>
+                    <UML:Stereotype name="return"/>
+                  </UML:ModelElement.stereotype>
+                  <UML:Message.sender>
+                    <UML:Object xmi.idref="EAID_OBJ_WorkStatusDisplay"/>
+                  </UML:Message.sender>
+                  <UML:Message.receiver>
+                    <UML:Object xmi.idref="EAID_OBJ_TradeWorker"/>
+                  </UML:Message.receiver>
+                </UML:Message>
+                
+              </UML:Namespace.ownedElement>
+            </UML:Collaboration>
+            
+            <!-- Sequence Diagram 2: Health & Safety Officer Alert -->
+            <UML:Collaboration xmi.id="EAID_SD2" name="Health Safety Officer Alert">
+              <UML:Namespace.ownedElement>
+                
+                <!-- Lifelines/Objects -->
+                
+                <!-- External Actor: MQTT Broker -->
+                <UML:Object xmi.id="EAID_OBJ_MqttBroker" name="mqttBroker:MqttBroker">
+                  <UML:ModelElement.stereotype>
+                    <UML:Stereotype name="External"/>
+                  </UML:ModelElement.stereotype>
+                </UML:Object>
+                
+                <!-- Integration: MqttClient -->
+                <UML:Object xmi.id="EAID_OBJ_MqttClient" name="mqttClient:MqttClient">
+                  <UML:ModelElement.stereotype>
+                    <UML:Stereotype name="Integration"/>
+                  </UML:ModelElement.stereotype>
+                </UML:Object>
+                
+                <!-- Controller: AlertController -->
+                <UML:Object xmi.id="EAID_OBJ_AlertController" name="alertController:AlertController">
+                  <UML:ModelElement.stereotype>
+                    <UML:Stereotype name="Controller"/>
+                  </UML:ModelElement.stereotype>
+                </UML:Object>
+                
+                <!-- Model: WorkerHealthModel -->
+                <UML:Object xmi.id="EAID_OBJ_WorkerHealthModel" name="workerHealthModel:WorkerHealthModel">
+                  <UML:ModelElement.stereotype>
+                    <UML:Stereotype name="Model"/>
+                  </UML:ModelElement.stereotype>
+                </UML:Object>
+                
+                <!-- Controller: BaselineCalculator -->
+                <UML:Object xmi.id="EAID_OBJ_BaselineCalc" name="baselineCalculator:BaselineCalculator">
+                  <UML:ModelElement.stereotype>
+                    <UML:Stereotype name="Controller"/>
+                  </UML:ModelElement.stereotype>
+                </UML:Object>
+                
+                <!-- View: AlertView -->
+                <UML:Object xmi.id="EAID_OBJ_AlertView" name="alertView:AlertView">
+                  <UML:ModelElement.stereotype>
+                    <UML:Stereotype name="View"/>
+                  </UML:ModelElement.stereotype>
+                </UML:Object>
+                
+                <!-- View: AlertNotificationPanel -->
+                <UML:Object xmi.id="EAID_OBJ_AlertNotification" name="alertNotification:AlertNotificationPanel">
+                  <UML:ModelElement.stereotype>
+                    <UML:Stereotype name="View"/>
+                  </UML:ModelElement.stereotype>
+                </UML:Object>
+                
+                <!-- Actor: Health Safety Officer -->
+                <UML:Object xmi.id="EAID_OBJ_HSO" name="HealthSafetyOfficer">
+                  <UML:ModelElement.stereotype>
+                    <UML:Stereotype name="actor"/>
+                  </UML:ModelElement.stereotype>
+                </UML:Object>
+                
+                <!-- Messages/Interactions -->
+                
+                <!-- 1. MQTT Broker -> MqttClient: publishMessage -->
+                <UML:Message xmi.id="EAID_MSG_SD2_1" name="publishMessage(topic: &quot;health/alerts/team/engineering&quot;, payload: String)">
+                  <UML:Message.sender>
+                    <UML:Object xmi.idref="EAID_OBJ_MqttBroker"/>
+                  </UML:Message.sender>
+                  <UML:Message.receiver>
+                    <UML:Object xmi.idref="EAID_OBJ_MqttClient"/>
+                  </UML:Message.receiver>
+                  <UML:Message.action>
+                    <UML:CallAction name="publishMessage"/>
+                  </UML:Message.action>
+                  <UML:ModelElement.taggedValue>
+                    <UML:TaggedValue tag="note" value="MQTT QoS Level 1 - At least once delivery"/>
+                  </UML:ModelElement.taggedValue>
+                </UML:Message>
+                
+                <!-- 2. MqttClient -> self: onMessageArrived -->
+                <UML:Message xmi.id="EAID_MSG_SD2_2" name="onMessageArrived(topic: String, message: MqttMessage)">
+                  <UML:Message.sender>
+                    <UML:Object xmi.idref="EAID_OBJ_MqttClient"/>
+                  </UML:Message.sender>
+                  <UML:Message.receiver>
+                    <UML:Object xmi.idref="EAID_OBJ_MqttClient"/>
+                  </UML:Message.receiver>
+                  <UML:Message.action>
+                    <UML:CallAction name="onMessageArrived"/>
+                  </UML:Message.action>
+                  <UML:ModelElement.taggedValue>
+                    <UML:TaggedValue tag="note" value="Callback triggered by Paho MQTT client library"/>
+                  </UML:ModelElement.taggedValue>
+                </UML:Message>
+                
+                <!-- 3. MqttClient -> self: parseAlertPayload -->
+                <UML:Message xmi.id="EAID_MSG_SD2_3" name="parseAlertPayload(payload: String) : AlertData">
+                  <UML:Message.sender>
+                    <UML:Object xmi.idref="EAID_OBJ_MqttClient"/>
+                  </UML:Message.sender>
+                  <UML:Message.receiver>
+                    <UML:Object xmi.idref="EAID_OBJ_MqttClient"/>
+                  </UML:Message.receiver>
+                  <UML:Message.action>
+                    <UML:CallAction name="parseAlertPayload"/>
+                  </UML:Message.action>
+                  <UML:ModelElement.taggedValue>
+                    <UML:TaggedValue tag="note" value="Parses JSON: {workerId: 'W12345', type: 'RESTING_HR_DEVIATION', currentValue: 78, baselineValue: 58, deviation: 34.5%, timestamp: 1643970840000}"/>
+                  </UML:ModelElement.taggedValue>
+                </UML:Message>
+                
+                <!-- 4. MqttClient -> AlertController: handleIncomingAlert -->
+                <UML:Message xmi.id="EAID_MSG_SD2_4" name="handleIncomingAlert(alertData: AlertData) : void">
+                  <UML:Message.sender>
+                    <UML:Object xmi.idref="EAID_OBJ_MqttClient"/>
+                  </UML:Message.sender>
+                  <UML:Message.receiver>
+                    <UML:Object xmi.idref="EAID_OBJ_AlertController"/>
+                  </UML:Message.receiver>
+                  <UML:Message.action>
+                    <UML:CallAction name="handleIncomingAlert"/>
+                  </UML:Message.action>
+                </UML:Message>
+                
+                <!-- 5. AlertController -> WorkerHealthModel: getWorkerById -->
+                <UML:Message xmi.id="EAID_MSG_SD2_5" name="getWorkerById(workerId: String) : Worker">
+                  <UML:Message.sender>
+                    <UML:Object xmi.idref="EAID_OBJ_AlertController"/>
+                  </UML:Message.sender>
+                  <UML:Message.receiver>
+                    <UML:Object xmi.idref="EAID_OBJ_WorkerHealthModel"/>
+                  </UML:Message.receiver>
+                  <UML:Message.action>
+                    <UML:CallAction name="getWorkerById"/>
+                  </UML:Message.action>
+                </UML:Message>
+                
+                <!-- 6. Return: worker -->
+                <UML:Message xmi.id="EAID_MSG_SD2_6" name="worker {id: 'W12345', name: 'John Doe', team: 'engineering'}">
+                  <UML:ModelElement.stereotype>
+                    <UML:Stereotype name="return"/>
+                  </UML:ModelElement.stereotype>
+                  <UML:Message.sender>
+                    <UML:Object xmi.idref="EAID_OBJ_WorkerHealthModel"/>
+                  </UML:Message.sender>
+                  <UML:Message.receiver>
+                    <UML:Object xmi.idref="EAID_OBJ_AlertController"/>
+                  </UML:Message.receiver>
+                </UML:Message>
+                
+                <!-- 7. AlertController -> BaselineCalculator: validateDeviation -->
+                <UML:Message xmi.id="EAID_MSG_SD2_7" name="validateDeviation(workerId: String, currentValue: double, alertType: AlertType) : DeviationAnalysis">
+                  <UML:Message.sender>
+                    <UML:Object xmi.idref="EAID_OBJ_AlertController"/>
+                  </UML:Message.sender>
+                  <UML:Message.receiver>
+                    <UML:Object xmi.idref="EAID_OBJ_BaselineCalc"/>
+                  </UML:Message.receiver>
+                  <UML:Message.action>
+                    <UML:CallAction name="validateDeviation"/>
+                  </UML:Message.action>
+                </UML:Message>
+                
+                <!-- 8. BaselineCalculator -> WorkerHealthModel: getRestingHrHistory -->
+                <UML:Message xmi.id="EAID_MSG_SD2_8" name="getRestingHrHistory(workerId: String, days: int) : List&lt;BiometricReading&gt;">
+                  <UML:Message.sender>
+                    <UML:Object xmi.idref="EAID_OBJ_BaselineCalc"/>
+                  </UML:Message.sender>
+                  <UML:Message.receiver>
+                    <UML:Object xmi.idref="EAID_OBJ_WorkerHealthModel"/>
+                  </UML:Message.receiver>
+                  <UML:Message.action>
+                    <UML:CallAction name="getRestingHrHistory"/>
+                  </UML:Message.action>
+                </UML:Message>
+                
+                <!-- 9. Return: readings -->
+                <UML:Message xmi.id="EAID_MSG_SD2_9" name="readings [30-day history, 420 readings]">
+                  <UML:ModelElement.stereotype>
+                    <UML:Stereotype name="return"/>
+                  </UML:ModelElement.stereotype>
+                  <UML:Message.sender>
+                    <UML:Object xmi.idref="EAID_OBJ_WorkerHealthModel"/>
+                  </UML:Message.sender>
+                  <UML:Message.receiver>
+                    <UML:Object xmi.idref="EAID_OBJ_BaselineCalc"/>
+                  </UML:Message.receiver>
+                </UML:Message>
+                
+                <!-- 10. BaselineCalculator -> self: calculateBaseline -->
+                <UML:Message xmi.id="EAID_MSG_SD2_10" name="calculateBaseline(readings: List&lt;BiometricReading&gt;) : BaselineMetrics">
+                  <UML:Message.sender>
+                    <UML:Object xmi.idref="EAID_OBJ_BaselineCalc"/>
+                  </UML:Message.sender>
+                  <UML:Message.receiver>
+                    <UML:Object xmi.idref="EAID_OBJ_BaselineCalc"/>
+                  </UML:Message.receiver>
+                  <UML:Message.action>
+                    <UML:CallAction name="calculateBaseline"/>
+                  </UML:Message.action>
+                  <UML:ModelElement.taggedValue>
+                    <UML:TaggedValue tag="note" value="Computes: mean=58.2, stdDev=4.1, threshold=66.4 (mean + 2*stdDev)"/>
+                  </UML:ModelElement.taggedValue>
+                </UML:Message>
+                
+                <!-- 11. BaselineCalculator -> self: assessDeviation -->
+                <UML:Message xmi.id="EAID_MSG_SD2_11" name="assessDeviation(currentValue: double, baseline: BaselineMetrics) : DeviationAnalysis">
+                  <UML:Message.sender>
+                    <UML:Object xmi.idref="EAID_OBJ_BaselineCalc"/>
+                  </UML:Message.sender>
+                  <UML:Message.receiver>
+                    <UML:Object xmi.idref="EAID_OBJ_BaselineCalc"/>
+                  </UML:Message.receiver>
+                  <UML:Message.action>
+                    <UML:CallAction name="assessDeviation"/>
+                  </UML:Message.action>
+                  <UML:ModelElement.taggedValue>
+                    <UML:TaggedValue tag="note" value="Current 78 vs threshold 66.4 = SIGNIFICANT deviation"/>
+                  </UML:ModelElement.taggedValue>
+                </UML:Message>
+                
+                <!-- 12. Return: analysis -->
+                <UML:Message xmi.id="EAID_MSG_SD2_12" name="analysis {severity: SIGNIFICANT, percentageDeviation: 34.5%, recommendation: &quot;Immediate check-in&quot;}">
+                  <UML:ModelElement.stereotype>
+                    <UML:Stereotype name="return"/>
+                  </UML:ModelElement.stereotype>
+                  <UML:Message.sender>
+                    <UML:Object xmi.idref="EAID_OBJ_BaselineCalc"/>
+                  </UML:Message.sender>
+                  <UML:Message.receiver>
+                    <UML:Object xmi.idref="EAID_OBJ_AlertController"/>
+                  </UML:Message.receiver>
+                </UML:Message>
+                
+                <!-- 13. AlertController -> self: createAlertRecord -->
+                <UML:Message xmi.id="EAID_MSG_SD2_13" name="createAlertRecord(worker: Worker, alertData: AlertData, analysis: DeviationAnalysis) : HealthAlert">
+                  <UML:Message.sender>
+                    <UML:Object xmi.idref="EAID_OBJ_AlertController"/>
+                  </UML:Message.sender>
+                  <UML:Message.receiver>
+                    <UML:Object xmi.idref="EAID_OBJ_AlertController"/>
+                  </UML:Message.receiver>
+                  <UML:Message.action>
+                    <UML:CallAction name="createAlertRecord"/>
+                  </UML:Message.action>
+                </UML:Message>
+                
+                <!-- 14. AlertController -> WorkerHealthModel: saveAlert -->
+                <UML:Message xmi.id="EAID_MSG_SD2_14" name="saveAlert(alert: HealthAlert) : void">
+                  <UML:Message.sender>
+                    <UML:Object xmi.idref="EAID_OBJ_AlertController"/>
+                  </UML:Message.sender>
+                  <UML:Message.receiver>
+                    <UML:Object xmi.idref="EAID_OBJ_WorkerHealthModel"/>
+                  </UML:Message.receiver>
+                  <UML:Message.action>
+                    <UML:CallAction name="saveAlert"/>
+                  </UML:Message.action>
+                </UML:Message>
+                
+                <!-- 15. WorkerHealthModel -> self: persistToDatabase -->
+                <UML:Message xmi.id="EAID_MSG_SD2_15" name="persistToDatabase(alert: HealthAlert)">
+                  <UML:Message.sender>
+                    <UML:Object xmi.idref="EAID_OBJ_WorkerHealthModel"/>
+                  </UML:Message.sender>
+                  <UML:Message.receiver>
+                    <UML:Object xmi.idref="EAID_OBJ_WorkerHealthModel"/>
+                  </UML:Message.receiver>
+                  <UML:Message.action>
+                    <UML:CallAction name="persistToDatabase"/>
+                  </UML:Message.action>
+                  <UML:ModelElement.taggedValue>
+                    <UML:TaggedValue tag="note" value="Inserts into HEALTH_ALERTS table with status=UNACKNOWLEDGED"/>
+                  </UML:ModelElement.taggedValue>
+                </UML:Message>
+                
+                <!-- 16. Return void -->
+                <UML:Message xmi.id="EAID_MSG_SD2_16" name="void">
+                  <UML:ModelElement.stereotype>
+                    <UML:Stereotype name="return"/>
+                  </UML:ModelElement.stereotype>
+                  <UML:Message.sender>
+                    <UML:Object xmi.idref="EAID_OBJ_WorkerHealthModel"/>
+                  </UML:Message.sender>
+                  <UML:Message.receiver>
+                    <UML:Object xmi.idref="EAID_OBJ_AlertController"/>
+                  </UML:Message.receiver>
+                </UML:Message>
+                
+                <!-- 17. AlertController -> AlertView: displayAlert -->
+                <UML:Message xmi.id="EAID_MSG_SD2_17" name="displayAlert(alert: HealthAlert) : void">
+                  <UML:Message.sender>
+                    <UML:Object xmi.idref="EAID_OBJ_AlertController"/>
+                  </UML:Message.sender>
+                  <UML:Message.receiver>
+                    <UML:Object xmi.idref="EAID_OBJ_AlertView"/>
+                  </UML:Message.receiver>
+                  <UML:Message.action>
+                    <UML:CallAction name="displayAlert"/>
+                  </UML:Message.action>
+                  <UML:ModelElement.taggedValue>
+                    <UML:TaggedValue tag="note" value="Runs on JavaFX Application Thread"/>
+                  </UML:ModelElement.taggedValue>
+                </UML:Message>
+                
+                <!-- 18. AlertView -> AlertNotificationPanel: showNotification -->
+                <UML:Message xmi.id="EAID_MSG_SD2_18" name="showNotification(alert: HealthAlert) : void">
+                  <UML:Message.sender>
+                    <UML:Object xmi.idref="EAID_OBJ_AlertView"/>
+                  </UML:Message.sender>
+                  <UML:Message.receiver>
+                    <UML:Object xmi.idref="EAID_OBJ_AlertNotification"/>
+                  </UML:Message.receiver>
+                  <UML:Message.action>
+                    <UML:CallAction name="showNotification"/>
+                  </UML:Message.action>
+                </UML:Message>
+                
+                <!-- 19. AlertNotificationPanel -> self: buildNotificationContent -->
+                <UML:Message xmi.id="EAID_MSG_SD2_19" name="buildNotificationContent(alert: HealthAlert) : VBox">
+                  <UML:Message.sender>
+                    <UML:Object xmi.idref="EAID_OBJ_AlertNotification"/>
+                  </UML:Message.sender>
+                  <UML:Message.receiver>
+                    <UML:Object xmi.idref="EAID_OBJ_AlertNotification"/>
+                  </UML:Message.receiver>
+                  <UML:Message.action>
+                    <UML:CallAction name="buildNotificationContent"/>
+                  </UML:Message.action>
+                  <UML:ModelElement.taggedValue>
+                    <UML:TaggedValue tag="note" value="Creates JavaFX VBox with alert icon, worker name, deviation details"/>
+                  </UML:ModelElement.taggedValue>
+                </UML:Message>
+                
+                <!-- 20. AlertNotificationPanel -> self: applyUrgencyStyle -->
+                <UML:Message xmi.id="EAID_MSG_SD2_20" name="applyUrgencyStyle(severity: Severity)">
+                  <UML:Message.sender>
+                    <UML:Object xmi.idref="EAID_OBJ_AlertNotification"/>
+                  </UML:Message.sender>
+                  <UML:Message.receiver>
+                    <UML:Object xmi.idref="EAID_OBJ_AlertNotification"/>
+                  </UML:Message.receiver>
+                  <UML:Message.action>
+                    <UML:CallAction name="applyUrgencyStyle"/>
+                  </UML:Message.action>
+                  <UML:ModelElement.taggedValue>
+                    <UML:TaggedValue tag="note" value="Applies red border, urgent icon for SIGNIFICANT severity"/>
+                  </UML:ModelElement.taggedValue>
+                </UML:Message>
+                
+                <!-- 21. AlertNotificationPanel -> self: slideIn -->
+                <UML:Message xmi.id="EAID_MSG_SD2_21" name="slideIn(duration: 400ms)">
+                  <UML:Message.sender>
+                    <UML:Object xmi.idref="EAID_OBJ_AlertNotification"/>
+                  </UML:Message.sender>
+                  <UML:Message.receiver>
+                    <UML:Object xmi.idref="EAID_OBJ_AlertNotification"/>
+                  </UML:Message.receiver>
+                  <UML:Message.action>
+                    <UML:CallAction name="slideIn"/>
+                  </UML:Message.action>
+                  <UML:ModelElement.taggedValue>
+                    <UML:TaggedValue tag="note" value="Animates notification panel from right edge using Platform.runLater"/>
+                  </UML:ModelElement.taggedValue>
+                </UML:Message>
+                
+                <!-- 22. Return void -->
+                <UML:Message xmi.id="EAID_MSG_SD2_22" name="void">
+                  <UML:ModelElement.stereotype>
+                    <UML:Stereotype name="return"/>
+                  </UML:ModelElement.stereotype>
+                  <UML:Message.sender>
+                    <UML:Object xmi.idref="EAID_OBJ_AlertNotification"/>
+                  </UML:Message.sender>
+                  <UML:Message.receiver>
+                    <UML:Object xmi.idref="EAID_OBJ_AlertView"/>
+                  </UML:Message.receiver>
+                </UML:Message>
+                
+                <!-- 23. AlertView -> self: updateAlertList -->
+                <UML:Message xmi.id="EAID_MSG_SD2_23" name="updateAlertList(alert: HealthAlert)">
+                  <UML:Message.sender>
+                    <UML:Object xmi.idref="EAID_OBJ_AlertView"/>
+                  </UML:Message.sender>
+                  <UML:Message.receiver>
+                    <UML:Object xmi.idref="EAID_OBJ_AlertView"/>
+                  </UML:Message.receiver>
+                  <UML:Message.action>
+                    <UML:CallAction name="updateAlertList"/>
+                  </UML:Message.action>
+                  <UML:ModelElement.taggedValue>
+                    <UML:TaggedValue tag="note" value="Adds to ObservableList&lt;HealthAlert&gt; bound to TableView"/>
+                  </UML:ModelElement.taggedValue>
+                </UML:Message>
+                
+                <!-- 24. AlertView -> self: playAlertSound -->
+                <UML:Message xmi.id="EAID_MSG_SD2_24" name="playAlertSound(severity: Severity)">
+                  <UML:Message.sender>
+                    <UML:Object xmi.idref="EAID_OBJ_AlertView"/>
+                  </UML:Message.sender>
+                  <UML:Message.receiver>
+                    <UML:Object xmi.idref="EAID_OBJ_AlertView"/>
+                  </UML:Message.receiver>
+                  <UML:Message.action>
+                    <UML:CallAction name="playAlertSound"/>
+                  </UML:Message.action>
+                  <UML:ModelElement.taggedValue>
+                    <UML:TaggedValue tag="note" value="Plays urgent.wav for SIGNIFICANT alerts"/>
+                  </UML:ModelElement.taggedValue>
+                </UML:Message>
+                
+                <!-- 25. Return void -->
+                <UML:Message xmi.id="EAID_MSG_SD2_25" name="void">
+                  <UML:ModelElement.stereotype>
+                    <UML:Stereotype name="return"/>
+                  </UML:ModelElement.stereotype>
+                  <UML:Message.sender>
+                    <UML:Object xmi.idref="EAID_OBJ_AlertView"/>
+                  </UML:Message.sender>
+                  <UML:Message.receiver>
+                    <UML:Object xmi.idref="EAID_OBJ_AlertController"/>
+                  </UML:Message.receiver>
+                </UML:Message>
+                
+                <!-- 26. Return void -->
+                <UML:Message xmi.id="EAID_MSG_SD2_26" name="void">
+                  <UML:ModelElement.stereotype>
+                    <UML:Stereotype name="return"/>
+                  </UML:ModelElement.stereotype>
+                  <UML:Message.sender>
+                    <UML:Object xmi.idref="EAID_OBJ_AlertController"/>
+                  </UML:Message.sender>
+                  <UML:Message.receiver>
+                    <UML:Object xmi.idref="EAID_OBJ_MqttClient"/>
+                  </UML:Message.receiver>
+                </UML:Message>
+                
+                <!-- 27. MqttClient -> MqttBroker: publishAck -->
+                <UML:Message xmi.id="EAID_MSG_SD2_27" name="publishAck(messageId: int)">
+                  <UML:Message.sender>
+                    <UML:Object xmi.idref="EAID_OBJ_MqttClient"/>
+                  </UML:Message.sender>
+                  <UML:Message.receiver>
+                    <UML:Object xmi.idref="EAID_OBJ_MqttBroker"/>
+                  </UML:Message.receiver>
+                  <UML:Message.action>
+                    <UML:CallAction name="publishAck"/>
+                  </UML:Message.action>
+                  <UML:ModelElement.taggedValue>
+                    <UML:TaggedValue tag="note" value="MQTT QoS 1 acknowledgment"/>
+                  </UML:ModelElement.taggedValue>
+                </UML:Message>
+                
+                <!-- 28. Final display to officer -->
+                <UML:Message xmi.id="EAID_MSG_SD2_28" name="Visual: Red notification banner | Audio: Urgent alert tone">
+                  <UML:ModelElement.stereotype>
+                    <UML:Stereotype name="return"/>
+                  </UML:ModelElement.stereotype>
+                  <UML:Message.sender>
+                    <UML:Object xmi.idref="EAID_OBJ_AlertView"/>
+                  </UML:Message.sender>
+                  <UML:Message.receiver>
+                    <UML:Object xmi.idref="EAID_OBJ_HSO"/>
+                  </UML:Message.receiver>
+                  <UML:ModelElement.taggedValue>
+                    <UML:TaggedValue tag="note" value="Shows: ⚠ John Doe - Resting HR elevated 34.5% above baseline (78 vs 58 BPM)"/>
+                  </UML:ModelElement.taggedValue>
+                </UML:Message>
+                
+              </UML:Namespace.ownedElement>
+            </UML:Collaboration>
+            
+          </UML:Namespace.ownedElement>
+        </UML:Package>
+        
+      </UML:Namespace.ownedElement>
+    </UML:Model>
+  </XMI.content>
+</XMI>

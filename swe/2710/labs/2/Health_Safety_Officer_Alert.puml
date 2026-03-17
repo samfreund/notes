@@ -1,0 +1,82 @@
+@startuml
+title Health Safety Officer Alert
+participant "mqttBroker:MqttBroker" as MqttBroker
+participant "mqttClient:MqttClient" as MqttClient
+participant "alertController:AlertController" as AlertController
+participant "workerHealthModel:WorkerHealthModel" as WorkerHealthModel
+participant "baselineCalculator:BaselineCalculator" as BaselineCalculator
+participant "alertView:AlertView" as AlertView
+participant "alertNotification:AlertNotificationPanel" as AlertNotification
+actor HealthSafetyOfficer
+
+MqttBroker -> MqttClient: publishMessage(topic, payload)
+note right of MqttBroker
+MQTT QoS Level 1 - At least once delivery
+end note
+MqttClient -> MqttClient: onMessageArrived(topic, message)
+note right of MqttClient
+Callback triggered by Paho MQTT client library
+end note
+MqttClient -> MqttClient: parseAlertPayload(payload)
+note right of MqttClient
+Parses JSON: {workerId:'W12345', type:'RESTING_HR_DEVIATION', currentValue:78, baselineValue:58, deviation:34.5%, timestamp:1643970840000}
+end note
+MqttClient -> AlertController: handleIncomingAlert(alertData)
+AlertController -> WorkerHealthModel: getWorkerById(workerId)
+WorkerHealthModel --> AlertController: worker {id:'W12345', name:'John Doe', team:'engineering'}
+AlertController -> BaselineCalculator: validateDeviation(workerId, currentValue, alertType)
+BaselineCalculator -> WorkerHealthModel: getRestingHrHistory(workerId, days)
+WorkerHealthModel --> BaselineCalculator: readings [30-day history, 420 readings]
+BaselineCalculator -> BaselineCalculator: calculateBaseline(readings)
+note right of BaselineCalculator
+Computes: mean=58.2, stdDev=4.1, threshold=66.4 (mean + 2*stdDev)
+end note
+BaselineCalculator -> BaselineCalculator: assessDeviation(currentValue, baseline)
+note right of BaselineCalculator
+Current 78 vs threshold 66.4 = SIGNIFICANT deviation
+end note
+BaselineCalculator --> AlertController: analysis {severity:SIGNIFICANT, percentageDeviation:34.5%, recommendation:"Immediate check-in"}
+AlertController -> AlertController: createAlertRecord(worker, alertData, analysis)
+AlertController -> WorkerHealthModel: saveAlert(alert)
+WorkerHealthModel -> WorkerHealthModel: persistToDatabase(alert)
+note right of WorkerHealthModel
+Inserts into HEALTH_ALERTS table with status=UNACKNOWLEDGED
+end note
+WorkerHealthModel --> AlertController: void
+AlertController -> AlertView: displayAlert(alert)
+note right of AlertView
+Runs on JavaFX Application Thread
+end note
+AlertView -> AlertNotification: showNotification(alert)
+AlertNotification -> AlertNotification: buildNotificationContent(alert)
+note right of AlertNotification
+Creates JavaFX VBox with alert icon, worker name, deviation details
+end note
+AlertNotification -> AlertNotification: applyUrgencyStyle(severity)
+note right of AlertNotification
+Applies red border, urgent icon for SIGNIFICANT severity
+end note
+AlertNotification -> AlertNotification: slideIn(duration: 400ms)
+note right of AlertNotification
+Animates notification panel from right edge using Platform.runLater
+end note
+AlertNotification --> AlertView: void
+AlertView -> AlertView: updateAlertList(alert)
+note right of AlertView
+Adds to ObservableList<HealthAlert> bound to TableView
+end note
+AlertView -> AlertView: playAlertSound(severity)
+note right of AlertView
+Plays urgent.wav for SIGNIFICANT alerts
+end note
+AlertView --> AlertController: void
+AlertController --> MqttClient: void
+MqttClient -> MqttBroker: publishAck(messageId)
+note right of MqttClient
+MQTT QoS 1 acknowledgment
+end note
+AlertView --> HealthSafetyOfficer: Visual: Red notification banner | Audio: Urgent alert tone
+note right of HealthSafetyOfficer
+Shows: ⚠ John Doe - Resting HR elevated 34.5% above baseline (78 vs 58 BPM)
+end note
+@enduml
