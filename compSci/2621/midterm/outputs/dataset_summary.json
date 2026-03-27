@@ -1,0 +1,31 @@
+{
+  "rows": 110,
+  "columns": 19,
+  "species_counts": {
+    "Bobcat": 57,
+    "Coyote": 28,
+    "GrayFox": 25
+  },
+  "missing_total": 47,
+  "missing_by_column": {
+    "Species": 0,
+    "Month": 0,
+    "Year": 0,
+    "Site": 0,
+    "Location": 0,
+    "Age": 0,
+    "Number": 0,
+    "Length": 0,
+    "Diameter": 6,
+    "Taper": 17,
+    "TI": 17,
+    "Mass": 1,
+    "d13C": 2,
+    "d15N": 2,
+    "CN": 2,
+    "Ropey": 0,
+    "Segmented": 0,
+    "Flat": 0,
+    "Scrape": 0
+  }
+}

@@ -1,111 +1,131 @@
-% Generic College Assignment Template
-\documentclass[12pt,a4paper]{article}
-
-% Uncomment to use letters instead of numbers for subsections
-% \renewcommand{\thesubsection}{\thesection.\alph{subsection}}
-
-% Package imports
-\usepackage[utf8]{inputenc}
-\usepackage[margin=2.5cm]{geometry}
-\usepackage{amsmath,amssymb,amsthm}
+\documentclass[10pt,a4paper]{article}
+\usepackage[margin=0.75in]{geometry}
 \usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{amsmath}
 \usepackage{hyperref}
 \usepackage{enumitem}
-\usepackage{fancyhdr}
-\usepackage{cite}
-\usepackage{listings}
-\usepackage{xcolor}
+\usepackage{placeins}
 
-% Header and footer setup
-\pagestyle{fancy}
-\fancyhf{}
-\lhead{\courseName}
-\rhead{\authorName}
-\cfoot{\thepage}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.25em}
+\setlist[itemize]{leftmargin=*,itemsep=0pt,topsep=2pt,parsep=0pt}
+\setlength{\textfloatsep}{8pt plus 1pt minus 2pt}
+\setlength{\floatsep}{8pt plus 1pt minus 2pt}
+\setlength{\intextsep}{8pt plus 1pt minus 2pt}
+\setlength{\abovecaptionskip}{3pt}
+\setlength{\belowcaptionskip}{2pt}
 
-% Code listing settings (optional, for programming assignments)
-\lstset{
-    basicstyle=\ttfamily\small,
-    breaklines=true,
-    frame=single,
-    numbers=left,
-    numberstyle=\tiny,
-    commentstyle=\color{gray},
-    keywordstyle=\color{blue}
-}
-
-% Document metadata
-\newcommand{\authorName}{Sam Freund}
-\newcommand{\courseName}{CSC 2621: Introduction to Data Science}
-\newcommand{\assignmentTitle}{Midterm Project}
-\newcommand{\dueDate}{\today}
-
-% Theorem environments (uncomment if needed)
-% \newtheorem{theorem}{Theorem}
-% \newtheorem{lemma}{Lemma}
-% \newtheorem{definition}{Definition}
+\title{Midterm Project Report\\Distinguishing Bobcat, Coyote, and Gray Fox Scats}
+\author{Sam Freund\\CSC 2621: Introduction to Data Science}
+\date{March 2026}
 
 \begin{document}
+\maketitle
 
-% Title section
-\begin{center}
-    {\Large \textbf{\assignmentTitle}}\\[0.5em]
-    {\large \courseName}\\[1em]
-    \authorName\ \\
-    Date: \dueDate
-\end{center}
-
-\vspace{1em}
-\hrule
-\vspace{2em}
-
-% Main content starts here
 \section{Introduction}
+Monitoring mesopredators such as bobcat (\textit{Lynx rufus}), coyote (\textit{Canis latrans}), and gray fox (\textit{Urocyon cinereoargenteus}) matters because they shape prey communities and carnivore competition. Scat surveys are non-invasive and scalable, but field identification by morphology alone is often error-prone when sympatric species produce similar scats \cite{reid2015}.
 
-Write your introduction here. This template provides a clean starting point for various types of assignments.
+Reid (2015), using DNA-verified labels, found that only some measured variables reliably separated species \cite{reid2015}. That result motivates combining morphology with biogeochemistry. Biogeochemical markers reflect diet and trophic position: coyotes are generally more omnivorous, bobcats more strictly carnivorous, and gray foxes consume vertebrates plus seasonal fruit/invertebrates \cite{adw_bobcat,adw_coyote,adw_grayfox}. Fecal DNA genotyping further shows that scat can support robust non-invasive population estimation \cite{kohn1999}.
+
+\textbf{Hypotheses.} (H1) At least one morphological and one biogeochemical trait differ by species. (H2) Diet-linked traits (d13C, d15N, C:N) provide strong separation, with coyote expected to show enriched d15N and less negative d13C. (H3) Contextual variables (site/month/location) are weaker identifiers than intrinsic traits.
 
 \section{Methods}
+\textbf{Dataset.} The dataset contains 110 observations and 19 columns (species label, contextual variables, morphological traits, and biogeochemical traits).
+
+\textbf{Preprocessing.} Columns were typed as categorical, integer/binary, or float. Missing values occurred in Diameter, Taper, TI, Mass, d13C, d15N, and C:N; inferential tests used complete cases for each variable set. Outliers were retained as plausible ecological variation.
+
+\textbf{Analysis scope.} Following assignment instructions, contextual predictors were not analyzed as discriminators. Tested trait groups were:
+\begin{itemize}
+\item Morphological continuous: Length, Diameter, Taper, TI, Mass
+\item Biogeochemical continuous: d13C, d15N, C:N
+\item Morphological binary: Ropey, Segmented, Flat, Scrape
+\end{itemize}
+
+\textbf{Statistical tests.} Kruskal-Wallis tests compared continuous traits across species, and chi-square tests compared binary-trait prevalence. Benjamini-Hochberg (BH) correction controlled false discovery rate.
+
+\textbf{Visualizations.} Boxplots with overlaid points show the strongest continuous effects, a pairplot summarizes biogeochemical structure (d13C, d15N, C:N), and grouped bar charts show binary-trait prevalence.
 
 \section{Results}
+Five continuous traits remained significant after BH correction: Mass, C:N, d15N, Diameter, and d13C. Among binary traits, only Segmented was significant. Figure~\ref{fig:combined} summarizes the strongest visual separations.
+
+\begin{figure}[!t]
+    \centering
+    \begin{minipage}[t]{0.49\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{outputs/figure_numeric_boxplots.png}
+    \end{minipage}\hfill
+    \begin{minipage}[t]{0.49\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{outputs/figure_biogeochemical_pairplot.png}
+    \end{minipage}
+    \caption{Left: top continuous trait differences by species (BH-adjusted Kruskal-Wallis p-values in panel titles). Right: biogeochemical trait relationships by species, with coyote shifted toward higher d15N and less negative d13C.}
+    \label{fig:combined}
+\end{figure}
+
+\begin{table}[!t]
+\centering
+\caption{Traits that significantly distinguished species (BH-adjusted $p<0.05$).}
+\footnotesize
+\begin{tabular}{lccc}
+\toprule
+\textbf{Trait} & \textbf{Bobcat} & \textbf{Coyote} & \textbf{GrayFox} \\
+\midrule
+Mass (median) & 11.24 & 16.75 & 4.37 \\
+Diameter (median) & 18.0 & 21.1 & 15.8 \\
+d15N (median) & 6.57 & 8.88 & 5.87 \\
+d13C (median) & -27.88 & -26.06 & -27.57 \\
+C:N (median) & 6.6 & 7.7 & 8.1 \\
+Segmented (proportion) & 0.74 & 0.50 & 0.35 \\
+\bottomrule
+\end{tabular}
+\label{tab:summary}
+\end{table}
+
+Coyote scat tended to be larger/heavier and shifted toward higher d15N and less negative d13C than bobcat and gray fox. Gray fox had the lowest median mass and diameter and the highest median C:N. Segmentation frequency was highest in bobcat samples.
 
 \section{Discussion}
+The results support H1 and H2: both morphological and biogeochemical traits distinguished species, and several of the strongest effects were biogeochemical (d13C, d15N, C:N). Higher coyote d15N is consistent with a higher trophic signal or a different dietary mix than gray fox, while d13C and C:N shifts likely reflect differences in prey composition and omnivory \cite{reid2015,adw_coyote,adw_grayfox}.
 
-% \begin{itemize}
-%     \item Bullet points
-%     \item Mathematical equations: $E = mc^2$
-%     \item Numbered lists
-% \end{itemize}
+Morphological traits were useful but not universally diagnostic. Mass and diameter separated species well, but length and taper index did not survive correction, reinforcing Reid's conclusion that morphology alone can misclassify some samples \cite{reid2015}. Contextual variables may guide field searches, but they are weaker identifiers because they depend on where and when samples were found rather than intrinsic properties.
 
-% For equations, use:
-% \begin{equation}
-%     \int_{-\infty}^{\infty} e^{-x^2} dx = \sqrt{\pi}
-% \end{equation}
+Overall, the most defensible discrimination profile combines intrinsic morphology (especially mass/diameter and segmented structure) with biogeochemistry (d13C, d15N, C:N) \cite{kohn1999}.
 
-% For multi-line equations:
-% \begin{align}
-%     f(x) &= x^2 + 2x + 1 \\
-%     &= (x + 1)^2
-% \end{align}
+\FloatBarrier
+\newpage
 
-% Uncomment to include a figure
-% \begin{figure}[h]
-%     \centering
-%     \includegraphics[width=0.6\textwidth]{filename.png}
-%     \caption{Your caption here}
-%     \label{fig:example}
-% \end{figure}
+\begin{thebibliography}{9}
 
-% Example code block (uncomment if needed)
-% \begin{lstlisting}[language=Python, caption=Example code]
-% def hello_world():
-%     print("Hello, World!")
-% \end{lstlisting}
+\bibitem{reid2015}
+Reid, R. E. B. (2015).
+A morphometric modeling approach to distinguishing among bobcat, coyote and gray fox scats.
+\textit{Wildlife Biology}, 21(5), 254--262.
+\href{https://doi.org/10.2981/wlb.00105}{doi:10.2981/wlb.00105}.
 
-% Insert code from file
-% \lstinputlisting[language=R, caption=R Code for Lab 1]{lab1.R}
+\bibitem{kohn1999}
+Kohn, M. H., York, E. C., Kamradt, D. A., Haught, G., Sauvajot, R. M., \& Wayne, R. K. (1999).
+Estimating population size by genotyping faeces.
+\textit{Proceedings of the Royal Society B}, 266(1420), 657--663.
+\href{https://doi.org/10.1098/rspb.1999.0686}{doi:10.1098/rspb.1999.0686}.
 
-% References (uncomment if needed)
-% \bibliographystyle{plain}
-% \bibliography{references}
+\bibitem{adw_bobcat}
+Ciszek, D. (2002).
+\textit{Lynx rufus} (On-line), Animal Diversity Web.
+Accessed March 18, 2026.
+\url{https://animaldiversity.org/accounts/Lynx_rufus/}.
+
+\bibitem{adw_coyote}
+Tokar, E. (2001).
+\textit{Canis latrans} (On-line), Animal Diversity Web.
+Accessed March 18, 2026.
+\url{https://animaldiversity.org/accounts/Canis_latrans/}.
+
+\bibitem{adw_grayfox}
+Vu, L. (2011).
+\textit{Urocyon cinereoargenteus} (On-line), Animal Diversity Web.
+Accessed March 18, 2026.
+\url{https://animaldiversity.org/accounts/Urocyon_cinereoargenteus/}.
+
+\end{thebibliography}
 
 \end{document}

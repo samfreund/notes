@@ -1,144 +1,169 @@
-\documentclass[12pt,a4paper]{article}
+\documentclass[11pt,a4paper]{article}
 \usepackage[margin=1in]{geometry}
 \usepackage{booktabs}
 \usepackage{longtable}
 \usepackage{array}
+\usepackage{graphicx}
 \usepackage{hyperref}
-\usepackage{titlesec}
 \usepackage{parskip}
 
-\hypersetup{
-    colorlinks=true,
-    linkcolor=blue,
-    urlcolor=blue
-}
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue}
 
-\title{Dataset Card}
-\date{}
+\title{Dataset Card: Bobcat, Coyote, and Gray Fox Scat Traits}
+\author{Sam Freund}
+\date{March 2026}
 
 \begin{document}
 
 \maketitle
 
-% ─────────────────────────────────────────────
 \section*{Summary Information}
-\textit{This describes the data set that you are going to use and what it was used for.
-You may choose to list models in here that used the data described in the card.
-The date is also important due to how data may change over time.
-Dataset cards do not necessarily describe all of the data provided by a sponsor or for the project,
-but they should describe all data \textbf{used} for the project.}
-
-\begin{tabular}{@{}ll@{}}
+\begin{tabular}{@{}p{0.28\linewidth}p{0.66\linewidth}@{}}
 \toprule
-\textbf{Field}       & \textbf{Description} \\
+\textbf{Field} & \textbf{Description} \\
 \midrule
-Name                 &                      \\
-Curation Date        &                      \\
-Sensitivity Level    &                      \\
-Summary              &                      \\
-Source               &                      \\
+Name & Dataset\_BobcatsCoyotesFoxes-1.csv \\
+Curation Date & Original field collection: 2011--2013; card prepared: March 2026 \\
+Sensitivity Level & Low (wildlife observations, no personal data) \\
+Summary & 110 DNA-verified scat observations from bobcat, coyote, and gray fox with morphological, biogeochemical, and contextual variables. \\
+Source & Reid (2015), Wildlife Biology, DOI: \href{https://doi.org/10.2981/wlb.00105}{10.2981/wlb.00105} \\
 \bottomrule
 \end{tabular}
 
-% ─────────────────────────────────────────────
 \section*{Card Authors}
-\textit{This describes the people that contributed to creating the dataset card.}
-
 \begin{tabular}{@{}ll@{}}
 \toprule
 \textbf{Name} & \textbf{Email} \\
 \midrule
-Sam Freund          & freunds@msoe.edu  \\
+Sam Freund & freunds@msoe.edu \\
 \bottomrule
 \end{tabular}
 
-% ─────────────────────────────────────────────
 \section*{Data Overview}
-\textit{General description of the data set. Such as number of features, how large the files are,
-number of observations, etc.}
-
 \begin{tabular}{@{}ll@{}}
 \toprule
-\textbf{Field}      & \textbf{Value} \\
+\textbf{Field} & \textbf{Value} \\
 \midrule
-Storage Size        &                \\
-Number of Rows      &                \\
-Number of Features  &                \\
-Data Format         &                \\
+Storage Size & 9,366 bytes (\~9.4 KB) \\
+Number of Rows & 110 \\
+Number of Features & 19 \\
+Data Format & Comma-separated values (CSV) \\
+Target Label & Species (Bobcat, Coyote, GrayFox) \\
 \bottomrule
 \end{tabular}
 
-% ─────────────────────────────────────────────
 \section*{Numerical Features Summary}
-\textit{This section shows the summary statistics for all numerical features in the data set.}
-
-\begin{longtable}{@{}lllllllll@{}}
+\begin{longtable}{@{}lrrrrrrrr@{}}
 \toprule
-\textbf{Feature} & \textbf{Count} & \textbf{Mean} & \textbf{Std Dev} &
-\textbf{Min} & \textbf{25\%} & \textbf{Median} & \textbf{75\%} & \textbf{Max} \\
+\textbf{Feature} & \textbf{Count} & \textbf{Mean} & \textbf{Std} & \textbf{Min} & \textbf{25\%} & \textbf{Median} & \textbf{75\%} & \textbf{Max} \\
 \midrule
 \endfirsthead
 \toprule
-\textbf{Feature} & \textbf{Count} & \textbf{Mean} & \textbf{Std Dev} &
-\textbf{Min} & \textbf{25\%} & \textbf{Median} & \textbf{75\%} & \textbf{Max} \\
+\textbf{Feature} & \textbf{Count} & \textbf{Mean} & \textbf{Std} & \textbf{Min} & \textbf{25\%} & \textbf{Median} & \textbf{75\%} & \textbf{Max} \\
 \midrule
 \endhead
- & & & & & & & & \\
+Length & 110 & 9.30 & 3.44 & 2.50 & 6.50 & 9.00 & 11.50 & 20.50 \\
+Diameter & 104 & 18.56 & 3.88 & 7.80 & 16.08 & 18.05 & 21.33 & 30.00 \\
+Taper & 93 & 27.43 & 15.06 & 2.30 & 17.30 & 25.80 & 37.40 & 91.50 \\
+TI & 93 & 1.60 & 1.01 & 0.23 & 0.99 & 1.43 & 1.89 & 8.68 \\
+Mass & 109 & 12.46 & 8.85 & 0.94 & 5.66 & 9.75 & 17.61 & 53.70 \\
+d13C & 108 & -26.86 & 2.18 & -29.85 & -28.08 & -27.47 & -26.45 & -19.67 \\
+d15N & 108 & 7.44 & 3.02 & 1.84 & 5.62 & 6.89 & 8.30 & 18.00 \\
+CN & 108 & 8.40 & 3.66 & 4.50 & 6.20 & 7.25 & 8.65 & 23.60 \\
+Year & 110 & 2011.94 & 0.71 & 2011 & 2011 & 2012 & 2012 & 2013 \\
+Age & 110 & 3.35 & 1.37 & 1 & 3 & 3 & 5 & 5 \\
+Number & 110 & 2.62 & 1.43 & 1 & 2 & 2 & 3 & 7 \\
+Ropey & 110 & 0.56 & 0.50 & 0 & 0 & 1 & 1 & 1 \\
+Segmented & 110 & 0.56 & 0.50 & 0 & 0 & 1 & 1 & 1 \\
+Flat & 110 & 0.05 & 0.23 & 0 & 0 & 0 & 0 & 1 \\
+Scrape & 110 & 0.05 & 0.21 & 0 & 0 & 0 & 0 & 1 \\
 \bottomrule
 \end{longtable}
 
-% ─────────────────────────────────────────────
 \section*{Categorical Features Summary}
-\textit{This section shows the equivalent summary statistic for all categorical features in the data set.}
-
-\begin{tabular}{@{}lll@{}}
+\begin{tabular}{@{}llll@{}}
 \toprule
-\textbf{Feature} & \textbf{Unique Values} & \textbf{Most Common Value} \\
+\textbf{Feature} & \textbf{Unique Values} & \textbf{Most Common Value} & \textbf{Count} \\
 \midrule
-                 &                        &                            \\
+Species & 3 & Bobcat & 57 \\
+Month & 9 & November & 17 \\
+Site & 2 & ANNU & 92 \\
+Location & 3 & Middle & 47 \\
 \bottomrule
 \end{tabular}
 
-% ─────────────────────────────────────────────
 \section*{Field Information}
-\textit{Document the table that is encoded, i.e.\ the table they are using to build the encoding.}
-
-\begin{longtable}{@{}llll@{}}
+\begin{longtable}{@{}p{0.16\linewidth}p{0.13\linewidth}p{0.2\linewidth}p{0.43\linewidth}@{}}
 \toprule
-\textbf{Feature Name} & \textbf{Data Type} & \textbf{Statistical Type} & \textbf{Description} \\
+\textbf{Feature} & \textbf{Data Type} & \textbf{Category} & \textbf{Description} \\
 \midrule
 \endfirsthead
 \toprule
-\textbf{Feature Name} & \textbf{Data Type} & \textbf{Statistical Type} & \textbf{Description} \\
+\textbf{Feature} & \textbf{Data Type} & \textbf{Category} & \textbf{Description} \\
 \midrule
 \endhead
-Feature\_example & int & Nominal & An example feature created for the use of the dataset card format. \\
+Species & categorical & Not a trait (label) & DNA-verified species class. \\
+Month & categorical & Contextual & Month of collection. \\
+Year & integer & Contextual & Year of collection (2011--2013). \\
+Site & categorical & Contextual & Field site code. \\
+Location & categorical & Contextual & Position on trail/road (edge/middle/etc.). \\
+Age & integer & Contextual & Estimated scat age class at collection. \\
+Number & integer & Contextual & Number of pieces in the sample. \\
+Length & float & Morphological & Scat length. \\
+Diameter & float & Morphological & Scat diameter. \\
+Taper & float & Morphological & Length/extent of tapering. \\
+TI & float & Morphological & Taper index. \\
+Mass & float & Morphological & Dry mass of sample. \\
+d13C & float & Biogeochemical & Carbon isotope ratio. \\
+d15N & float & Biogeochemical & Nitrogen isotope ratio. \\
+CN & float & Biogeochemical & Carbon-to-nitrogen ratio. \\
+Ropey & binary (0/1) & Morphological & Rope-like texture indicator. \\
+Segmented & binary (0/1) & Morphological & Segmented morphology indicator. \\
+Flat & binary (0/1) & Morphological & Flat shape indicator. \\
+Scrape & binary (0/1) & Morphological/contextual sign & Presence of scrape mark near scat. \\
 \bottomrule
 \end{longtable}
 
-% ─────────────────────────────────────────────
-\section*{Example Entry}
-\textit{It is helpful to track a few observations that you are familiar with.
-Pick an ``average'' observation as well as a few that exhibit features or classes that you are
-interested in. E.g.\ for a cancer dataset you might choose a sample that has all of the classes
-that you want to predict or that shows severe progression of the disease.}
+\section*{Example Entries}
+Representative rows (one per species):
+\begin{itemize}
+\item Coyote sample: January 2012, YOLA edge, length 9.5, diameter 25.7, mass 15.89, d13C -26.85, d15N 6.94, CN 8.5.
+\item Bobcat sample: January 2012, YOLA middle, length 9.0, diameter 18.8, mass 8.40, d13C -28.73, d15N 8.52, CN 8.1.
+\item Gray fox sample: January 2012, ANNU middle, length 8.0, mass 2.51, d13C -25.79, d15N 7.83, CN 20.5.
+\end{itemize}
 
-% ─────────────────────────────────────────────
 \section*{Exploratory Charts}
-\textit{Include a scatter plot matrix of all of your numeric features.
-Show bar graphs for your categorical features.
-If you know what response you are interested in, you might choose to make a plot of the first two
-principal components (from PCA or similar feature reduction algorithm) vs.\ your known response
-or classes.}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.95\linewidth]{outputs/figure_numeric_boxplots.png}
+    \caption{Boxplots of the strongest continuous trait differences by species (based on Kruskal-Wallis tests with BH correction).}
+\end{figure}
 
-% ─────────────────────────────────────────────
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.95\linewidth]{outputs/figure_biogeochemical_pairplot.png}
+    \caption{Pairwise relationships among biogeochemical variables (d13C, d15N, and C:N) by species.}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.9\linewidth]{outputs/figure_binary_prevalence.png}
+    \caption{Prevalence of binary morphological traits by species.}
+\end{figure}
+
 \section*{Notable Feature Processing}
-\textit{If you decide to do feature scaling or if you are doing any feature engineering, the process
-should go here. Remember that the mean and standard deviation of features would be important for
-any future applications that might use this data.}
+\begin{itemize}
+\item Data types were explicitly assigned: categorical (Species/Month/Site/Location), integer (Year/Age/Number/binary traits), and float (continuous trait variables).
+\item Missing values were present in Diameter (6), Taper (17), TI (17), Mass (1), d13C (2), d15N (2), and CN (2).
+\item For inferential analysis, complete-case rows for tested traits were used (listwise deletion on required columns).
+\item Outliers were retained because extreme values may reflect real dietary/ecological variability and robust nonparametric tests (Kruskal-Wallis, Mann-Whitney) were used.
+\end{itemize}
 
-% ─────────────────────────────────────────────
 \section*{Notes}
-\textit{Document any additional considerations, concerns, or otherwise here.}
+\begin{itemize}
+\item Species classes are imbalanced (Bobcat n=57, Coyote n=28, GrayFox n=25), so medians and robust tests are emphasized over means alone.
+\item Contextual variables (site/month/location/year) are useful for collection metadata but were excluded from the species-discrimination hypothesis tests.
+\item The dataset supports strong comparisons for several traits (mass, diameter, d13C, d15N, C:N, segmented), but results are site- and time-specific to central coastal California.
+\end{itemize}
 
 \end{document}
