@@ -13,7 +13,10 @@ int longestRow(int table[], int size) {
 
 int axisWidth(int max_frequency) {
     if (max_frequency <= 0) return 10;
-    int groups = (int)ceil(max_frequency / 5.0) + 1;
+    int groups = (int)ceil(max_frequency / 5.0);
+    if (groups % 2 != 0) {
+	 groups++;
+    }
     return groups * 5;
 }
 
@@ -53,11 +56,10 @@ int main() {
         }
     }
     int maxFreq = longestRow(counts, size);
-    int width = axisWidth(maxFreq);
     for (int i = upper; i >= lower; i--) {
         printRow(i, counts[i]);
     }
-    drawAxis(width);
+    drawAxis(axisWidth(maxFreq));
     delete[] counts;
     return 0;
 }
