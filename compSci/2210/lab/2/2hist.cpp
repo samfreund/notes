@@ -24,12 +24,13 @@ void drawAxis(int width) {
         cout << "----+";
     }
     cout << endl << "    ";
+    cout << left;
     for (int i = 0; i <= segments; i++) {
         int label = i * 5;
-        if (i > 0) cout << setw(5);
-        if (label <= width) cout << label;
+        if (label <= width) cout << setw(5) << label;
     }
     cout << endl;
+    cout << right;
 }
 
 void printRow(int value, int count) {
