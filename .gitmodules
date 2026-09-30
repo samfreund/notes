@@ -1,3 +1,6 @@
 [submodule "compSci/2410/27s1-swe2410-chk26-samfreund"]
 	path = compSci/2410/27s1-swe2410-chk26-samfreund
 	url = git@github.com:msoecsse/27s1-swe2410-chk26-samfreund.git
+[submodule "compSci/2410/27s1-swe2410-garden26-samfreund"]
+	path = compSci/2410/27s1-swe2410-garden26-samfreund
+	url = git@github.com:msoecsse/27s1-swe2410-garden26-samfreund
