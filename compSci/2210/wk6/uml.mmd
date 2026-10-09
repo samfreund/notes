@@ -1,0 +1,30 @@
+classDiagram
+    class LibraryCard {
+        -string holder
+        -const int number
+        -int booksOut
+        -double fines
+        #static int count
+        #static int nextNumber
+        #static const int MAX_BOOKS = 3
+        #static const double FINE_LIMIT = 5.00
+        #static const double DAILY_FINE = 0.25
+        +LibraryCard(string name)
+        +LibraryCard(string name, double startingFines)
+        +LibraryCard()
+        +~LibraryCard()
+        +LibraryCard(const LibraryCard& other) delete
+        +operator=(const LibraryCard& other) delete
+        +getHolder() string
+        +getNumber() int
+        +getBooksOut() int
+        +getFines() double
+        +setHolder(string name) bool
+        +checkOut() bool
+        +returnBook(int daysLate) bool
+        +payFine(double amount) bool
+        +print() void
+        #activeCards() int
+        -isValidName(const string& name) bool
+        -cleanFines(double fines) double
+    }

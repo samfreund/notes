@@ -1,0 +1,125 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{enumitem}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+
+\title{LibraryCard --- Written Questions}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{enumerate}[leftmargin=2em, itemsep=1em]
+
+\item \textbf{Which C++ feature did you use to meet B4 (the number never changes)?
+Why does that choice force you to set the number in a particular place in the constructor?}
+
+I declared the member as \texttt{const int number} in \texttt{LibraryCard.h}.
+A \texttt{const} data member cannot be assigned after the object is created, so
+the only chance to give it a value is in the constructor's member-initializer
+list (I used \texttt{number(nextNumber++)} there); assigning it in the
+constructor body would not compile. This makes the compiler, not my
+discipline, enforce that nothing ever changes the number.
+
+\item \textbf{How did you meet B5 (each rule written once)? Name the feature or
+features you used.}
+
+Each rule lives in its own \emph{private static member function}:
+\texttt{isValidName()} holds the ``at least 2 characters'' rule and
+\texttt{cleanFines()} holds the ``negative becomes 0'' rule. The constructor
+calls both in its member-initializer list, and \texttt{setHolder()} calls
+\texttt{isValidName()}. In addition, \emph{delegating constructors} route the
+one-argument and default constructors through the two-argument constructor,
+so all three creation paths share a single body. No check is copy-pasted.
+
+\item \textbf{The test program's output ends with five closed lines. Explain why
+they come out in that order, and why Card 5004 closed appears much earlier.}
+
+Automatic (local) objects are destroyed in \emph{reverse order of construction}
+when the block they live in ends. \texttt{temp} (card 5004) is declared inside
+its own inner block, so its destructor runs at that block's closing brace,
+which is why ``Card 5004 closed'' appears right after the second
+\texttt{Active: 4} line. The five locals in \texttt{main} were constructed in
+the order ana (5001), ben (5002), x (5003), \texttt{lobby[0]} (5005),
+\texttt{lobby[1]} (5006), so they are destroyed in exactly the reverse order:
+\texttt{lobby} first, array elements in reverse index order (5006, 5005),
+then x (5003), ben (5002), and ana (5001).
+
+\item \textbf{If printReport failed to compile at some point, what was the error
+and what did you change? If it never failed, what did you do in advance so it
+wouldn't?}
+
+It never failed. In advance, I marked every member function that only reads the
+card --- the four getters and \texttt{print()} --- as \texttt{const} in the
+class declaration. The parameter of \texttt{printReport} is
+\texttt{const LibraryCard\&}, and a const object may only call const member
+functions, so without those \texttt{const} qualifiers the call
+\texttt{card.print()} would not have compiled.
+
+\item \textbf{If copying were allowed, what would go wrong with the card numbers?
+Use the words copy constructor in your answer.}
+
+The compiler-generated copy constructor would copy the \texttt{number} field
+verbatim into the new object, so two live card objects would report the same
+card number. That breaks the uniqueness rule (B3): after
+\texttt{LibraryCard copy = ana;} both cards would claim to be card 5001, and
+there would be no way to tell which physical card a record belongs to.
+
+\item \textbf{Your class has both constructors and a setter for the holder's name.
+Why isn't setHolder enough on its own?}
+
+A member function can only run on an object that already exists, so the object
+must be created in a valid state before \texttt{setHolder} could ever be called:
+creation must sanitize the name, assign the card number, and zero the book
+count without any chance of failure (B2), whereas \texttt{setHolder} is allowed
+to reject a name and return \texttt{false}. The card number makes this
+impossible anyway, because it is a \texttt{const} member that no setter can
+ever assign --- only a constructor's initializer list can give it its value.
+
+\item \textbf{Suppose you forgot to add LibraryCard.cpp to add\_executable. Which
+tool reports the problem (compiler or linker), and what does the error say?}
+
+The \emph{linker} reports it. \texttt{main.cpp} still compiles, because the
+declarations in \texttt{LibraryCard.h} are enough for the compiler; but with no
+definitions anywhere, linking fails with errors such as:
+\begin{verbatim}
+undefined reference to `LibraryCard::LibraryCard(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >)'
+undefined reference to `LibraryCard::activeCards()'
+undefined reference to `LibraryCard::count'
+collect2: error: ld returned 1 exit status
+\end{verbatim}
+
+\end{enumerate}
+
+\section*{E1 --- First error line for each must-not-compile check}
+
+Each line was uncommented one at a time and built; the first error line from
+each build is copied below (line numbers refer to my \texttt{main.cpp}).
+
+\begin{enumerate}[leftmargin=2em]
+\item \texttt{LibraryCard copy = ana;}
+\begin{verbatim}
+main.cpp:58:24: error: use of deleted function 'LibraryCard::LibraryCard(const LibraryCard&)'
+\end{verbatim}
+
+\item \texttt{lobby[0] = ana;}
+\begin{verbatim}
+main.cpp:59:16: error: use of deleted function 'LibraryCard& LibraryCard::operator=(const LibraryCard&)'
+\end{verbatim}
+
+\item \texttt{std::string name = "Zoe";  printReport(name);}
+\begin{verbatim}
+main.cpp:60:44: error: invalid initialization of reference of type 'const LibraryCard&'
+from expression of type 'std::string' {aka 'std::__cxx11::basic_string<char>'}
+\end{verbatim}
+\end{enumerate}
+
+The third error occurs because the \texttt{LibraryCard(std::string)}
+constructor is \texttt{explicit}, so a \texttt{std::string} cannot implicitly
+convert to a \texttt{LibraryCard} when initializing the
+\texttt{const LibraryCard\&} parameter (B6).
+
+\end{document}
